@@ -1,0 +1,10 @@
+{
+ "siteUrl": "https://woori-demo.example",
+ "launch": "",
+ "everyDays": 2,
+ "maxWave": 4,
+ "postDays": 30,
+ "postsPerDay": 1.5,
+ "hold": null,
+ "_todo": "도메인 확정·오픈일에 siteUrl(한글 도메인은 퓨니코드)과 launch(YYYY-MM-DD)를 채운다. 오픈 일정 D0 묶음1(25%) -> D2 묶음2(50%) -> D4 묶음3(75%) -> D6 묶음4(100%)"
+}

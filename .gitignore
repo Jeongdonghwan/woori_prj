@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+public/og
+__pycache__/
+tsconfig.tsbuildinfo
+deploy/
+_preview/
+source/blog_img/
