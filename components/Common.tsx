@@ -41,7 +41,7 @@ export const Header = () => (
   <header className="site-header">
     <div className="wrap header-inner">
       <Link href="/" className="logo" aria-label={`${BRAND} 홈`}>
-        <span className="logo-mark" aria-hidden="true">W</span>
+        <img src="/img/logo-mark.png" className="logo-img" alt="우리설비 WOORI 로고" width={40} height={37} />
         <span className="logo-text"><b>{BRAND}</b><small>하수구·변기·싱크대 막힘 · 고압세척</small></span>
       </Link>
       <nav className="nav" aria-label="주 메뉴">

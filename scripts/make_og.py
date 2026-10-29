@@ -13,7 +13,7 @@ OUT = ROOT / 'public' / 'og'
 W, H = 1200, 630
 SAFE_L, SAFE_W = 300, 600  # 가운데 정사각형(285~915) 안쪽
 BRAND, PHONE = '우리설비', '010-9234-7119'  # lib/site.ts 와 맞출 것
-NAVY, ACCENT = (22, 36, 92), (198, 236, 44)
+NAVY, ACCENT = (0, 31, 128), (60, 188, 240)  # 로고 남색·하늘색
 # 윈도우는 맑은 고딕, 리눅스(예약 작업)는 Noto CJK — fonts-noto-cjk 패키지
 _FONTS = [(r'C:\Windows\Fonts\malgunbd.ttf', r'C:\Windows\Fonts\malgun.ttf'),
           ('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc', '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'),

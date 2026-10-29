@@ -48,7 +48,6 @@ export default function Home() {
   const posts = getPosts().slice(0, 5);
   const hubs = OPEN_PAGES.filter((p) => inSitemap(p) && p.unit === '시·군' && !p.mod).slice(0, 30);
   const carousel = hubs.length >= 10 ? hubs : OPEN_PAGES.filter(inSitemap).slice(0, 30);
-  const logs = new Set(CASES.map((c) => c.logNo)).size;
   const svcLink = (svc: string) => OPEN_PAGES.find((p) => inSitemap(p) && p.city === '천안' && p.service === svc && p.unit === '시·군' && !p.mod)
     || OPEN_PAGES.find((p) => inSitemap(p) && p.service === svc);
   const tickerNames = ['천안', '아산', '불당동', '두정동', '성정동', '쌍용동', '백석동', '신방동', '차암동', '구성동', '목천읍', '성거읍', '입장면', '배방읍', '탕정', '모종동', '음봉면', '둔포', '인주'];
@@ -74,14 +73,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="stats-band">
-        <dl className="wrap stats">
-          <div><dt>블로그 시공 글</dt><dd><span data-count={logs}>{logs}</span>편</dd></div>
-          <div><dt>현장 사진</dt><dd><span data-count={CASES.length}>{CASES.length}</span>장</dd></div>
-          <div><dt>현장 장비</dt><dd><span data-count={TOOLS.length}>{TOOLS.length}</span>종</dd></div>
-          <div><dt>지역 안내</dt><dd><span data-count={OPEN_PAGES.length}>{OPEN_PAGES.length.toLocaleString()}</span>쪽</dd></div>
-        </dl>
-      </section>
 
       <Ticker items={tickerNames} />
 

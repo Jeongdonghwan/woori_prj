@@ -1,20 +1,19 @@
-/* 우리설비 — 짙은 코발트 + 흰 + 차가운 회색 + 라임 강조 1색.
-   web-design 프리셋 4(로컬 서비스) 리듬. 기존 사이트와 겹치지 않게: 스타누수(남청+물빛), 선호환경(녹청+노랑), 파워크레인(먹색+노랑·주황)과 다른
-   코발트·라임 조합. 라임은 버튼·상담 띠·표식 같은 작은 면적에만, 흰 바탕 글자색으로는 쓰지 않는다.
-   표면: 흰(--paper) / 코발트(--cob, --cob-2, --deep) / 차가운 회색(--mist) / 강조(--lime)
-   리듬: 흰 헤더 → 코발트 히어로 → 흰 답 상자 → 회색 띠 → 흰 → 회색 → 코발트 장비 띠 → 라임 상담 띠 → 흰 → 회색 → 코발트 마무리 */
+/* 우리설비 — 로고 색(남색 #001f80 + 물방울 하늘색 #00a6e3) 기준. 2026-10-29 사용자 로고 반영.
+   표면: 흰(--paper) / 남색(--cob, --cob-2, --deep) / 차가운 회색(--mist) / 강조(--lime = 하늘색, 변수명 유지)
+   하늘색은 짙은 글자와만 짝지어 쓴다(버튼·상담 띠·표식). 흰 바탕 글자색으로 쓰지 않는다.
+   리듬: 흰 헤더 → 밝은 회색 히어로(사진 오른쪽 전체 높이) → 흰 → 회색 → 남색 장비 띠 → 하늘색 상담 띠 → 흰 → 회색 → 남색 마무리 */
 :root {
-  --cob: #16245c;
-  --cob-2: #22377f;
-  --deep: #0d1638;
+  --cob: #001f80;
+  --cob-2: #1640a8;
+  --deep: #0a1640;
   --paper: #ffffff;
-  --mist: #eceef3;
+  --mist: #eef2f7;
   --mist-2: #dde1ea;
   --ink: #121a33;
   --line: #d3d8e3;
   --line-dark: rgba(255,255,255,.16);
   --muted: #545d74;
-  --lime: #c6ec2c;
+  --lime: #3cbcf0;
   --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   --ease: cubic-bezier(.2,.7,.2,1);
 }
@@ -105,14 +104,6 @@ button { font: inherit; color: inherit; }
 @media (max-width: 560px) { .hero-photo { margin: 0 -16px; height: 290px; } }
 
 /* ---------- 숫자 띠 (메인) ---------- */
-.stats-band { background: var(--deep); color: #fff; }
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 auto; padding-top: 30px; padding-bottom: 30px; }
-.stats div { padding: 0 18px; border-left: 1px solid var(--line-dark); }
-.stats div:first-child { border-left: 0; padding-left: 0; }
-.stats dt { font-family: var(--mono); font-size: .74rem; letter-spacing: .08em; color: rgba(255,255,255,.6); }
-.stats dd { margin: 2px 0 0; font-size: clamp(1.6rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.stats dd span { color: var(--lime); }
-@media (max-width: 640px) { .stats { grid-template-columns: 1fr 1fr; gap: 18px 0; } .stats div:nth-child(3) { border-left: 0; padding-left: 0; } }
 
 /* ---------- 버튼 ---------- */
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
@@ -400,3 +391,23 @@ button { font: inherit; color: inherit; }
   .timeline::after { width: 100% !important; }
   .ticker-track { animation: none; }
 }
+
+/* ---------- 2026-10-29 개편: 로고 이미지, 밝은 히어로 ---------- */
+.logo-img { width: 40px; height: auto; flex: none; }
+.hero { background: var(--mist); color: var(--ink); }
+.hero::before { width: 100%; height: 6px; bottom: auto; background: linear-gradient(90deg, var(--cob) 0 70%, var(--lime) 70% 100%); }
+.hero .eyebrow { color: var(--cob-2); }
+.hero .eyebrow::before { background: var(--lime); }
+.hero h1 { color: var(--cob); }
+.hero h1 span + span i { color: var(--ink); box-shadow: inset 0 -.22em 0 var(--lime); display: inline-block; }
+.hero-lead { color: var(--muted); }
+.hero .btn-text { color: var(--ink); }
+.hero .btn-primary { background: var(--cob); color: #fff; }
+.hero-specs { border-top: 1px solid var(--line); }
+.hero-specs dt { opacity: 1; color: var(--cob-2); }
+.hero-photo { background: var(--mist-2); }
+.hero-photo::before { background: var(--mist); }
+.hero-photo figcaption { background: var(--cob); color: #fff; }
+.hero-photo figcaption b { color: var(--lime); }
+.hero .crumbs { color: var(--muted); }
+.hero .crumbs a:hover { color: var(--cob); }

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   verification: { google: GOOGLE_VERIFY || undefined, other: NAVER_VERIFY ? { 'naver-site-verification': NAVER_VERIFY } : undefined },
 };
 
-export const viewport: Viewport = { themeColor: '#16245c', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#001f80', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
