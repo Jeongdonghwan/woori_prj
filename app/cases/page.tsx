@@ -32,10 +32,14 @@ export default function Cases() {
         },
         itemListJsonLd(OPEN_PAGES.filter((p) => inSitemap(p) && p.unit === '시·군' && !p.mod).slice(0, 20).map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
-      <div className="wrap content page-top">
-        <p className="eyebrow dark">네이버 블로그 gook1008</p>
-        <h1 className="page-title">시공 사례</h1>
-        <p className="prose-p">{BRAND} 상호로 블로그에 올린 글({fmt(posts[posts.length - 1][0].date)} ~ {fmt(posts[0][0].date)})의 현장 사진입니다. 지도 캡처, 출동 차량(번호판이 보일 수 있는 사진), 화면 캡처는 뺐습니다. 글마다 원문 링크를 붙였습니다.</p>
+      <section className="page-hero">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>시공 사례</span><span>·</span><span className="crumbs-where">네이버 블로그 gook1008</span></nav>
+          <h1 className="page-title">시공 사례</h1>
+          <p className="page-lead">{BRAND} 상호로 블로그에 올린 글({fmt(posts[posts.length - 1][0].date)} ~ {fmt(posts[0][0].date)})의 현장 사진입니다. 지도 캡처, 출동 차량(번호판이 보일 수 있는 사진), 화면 캡처는 뺐습니다. 글마다 원문 링크를 붙였습니다.</p>
+        </div>
+      </section>
+      <div className="wrap content">
         <ol className="case-list">
           {posts.map((g, i) => {
             const k = g[0];

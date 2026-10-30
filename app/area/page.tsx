@@ -27,18 +27,22 @@ export default function AreaIndex() {
           ...top.map((p) => ({ name: p.kw, path: pageEncodedPath(p) })),
         ]),
       ]} />
-      <div className="wrap content page-top">
-        <p className="eyebrow dark">지역</p>
-        <h1 className="page-title">지역별 하수구·변기·싱크대 막힘 안내</h1>
-        <p className="prose-p">{BRAND} 블로그에는 천안·아산 전 지역 출동으로 적혀 있습니다. 청주·평택·세종·공주·예산 페이지는 출동 가능 여부를 통화로 먼저 확인하도록 안내합니다. 지금 {OPEN_PAGES.length.toLocaleString()}쪽이 열려 있습니다.</p>
-        <Actions />
+      <section className="page-hero">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>지역</span></nav>
+          <h1 className="page-title">지역별 하수구·변기·싱크대 막힘 안내</h1>
+          <p className="page-lead">{BRAND} 블로그에는 천안·아산 전 지역 출동으로 적혀 있습니다. 청주·평택·세종·공주·예산 페이지는 출동 가능 여부를 통화로 먼저 확인하도록 안내합니다.</p>
+          <Actions />
+        </div>
+      </section>
+      <div className="wrap content">
         <section className="sec">
           <h2 className="area-h">시·군</h2>
           <div className="cities">
             {cities.map((city) => (
               <Link key={city} href={cityPath(city)} className="city-row">
                 <div><b>{city}</b><span>{CITIES[city].full}</span></div>
-                <em>{cityPages(city).length.toLocaleString()}</em>
+                <IconArrow />
               </Link>
             ))}
           </div>
@@ -49,7 +53,7 @@ export default function AreaIndex() {
             <section key={city} className="sec">
               <h2 className="area-h"><Link href={cityPath(city)}>{city} <IconArrow /></Link></h2>
               <ul className="area-list">
-                {keys.map((key) => <li key={key}><Link href={`${cityPath(city)}#${encodeURIComponent(key)}`}>{PLACES[key].name} <small>{cityPages(city).filter((p) => p.place === key).length}</small></Link></li>)}
+                {keys.map((key) => <li key={key}><Link href={`${cityPath(city)}#${encodeURIComponent(key)}`}>{PLACES[key].name}</Link></li>)}
               </ul>
               <ul className="linklist">
                 {top.filter((p) => p.city === city).slice(0, 6).map((p) => <li key={p.slug}><Link href={pagePath(p)}>{p.kw}<IconArrow /></Link></li>)}

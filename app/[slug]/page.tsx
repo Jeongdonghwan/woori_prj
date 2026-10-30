@@ -5,7 +5,7 @@ import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, canonicalPath, 
 import { compose } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, IconArrow, JsonLd, SectionHead, Ticker } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead } from '../../components/Common';
 
 export const dynamicParams = false;
 
@@ -61,9 +61,8 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         <div className="wrap hero-grid">
           <div className="hero-text">
             <nav className="crumbs" aria-label="경로">
-              <Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><Link href={cityPath(p.city)}>{p.city}</Link>
+              <Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><Link href={cityPath(p.city)}>{p.city}</Link><span>·</span><span className="crumbs-where">{c.eyebrow}</span>
             </nav>
-            <p className="eyebrow">{c.eyebrow}</p>
             <h1><span><i>{first}</i></span>{h1b && <span><i>{h1b}</i></span>}</h1>
             <p className="hero-lead">{c.lead}</p>
             <Actions />
@@ -82,11 +81,9 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </section>
       </div>
 
-      <Ticker items={c.ticker} />
-
       <div className="wrap content">
         <section className="sec">
-          <SectionHead no="01" title={c.region.heading} />
+          <SectionHead title={c.region.heading} />
           <div className="cols">
             <div className="prose" data-reveal>
               {c.intro.map((t, i) => <p key={i} className={i === 0 ? 'first' : ''}>{t}</p>)}
@@ -101,7 +98,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </section>
 
         <section className="sec mist">
-          <SectionHead no="02" title={c.view.heading} />
+          <SectionHead title={c.view.heading} />
           <div className="prose" data-reveal>{c.view.paras.map((t, i) => <p key={i}>{t}</p>)}</div>
           {c.view.table && <dl className="spec" data-reveal>{c.view.table.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
           {c.view.list && <>
@@ -112,7 +109,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </section>
 
         <section className="sec">
-          <SectionHead no="03" title={c.symptoms.heading} />
+          <SectionHead title={c.symptoms.heading} />
           <div className="signs">
             <ul className="reveal-group">{c.symptoms.items.map((x) => <li key={x}>{x}</li>)}</ul>
             <figure data-reveal className="mask">
@@ -125,23 +122,23 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
 
       <section className="band">
         <div className="wrap">
-          <SectionHead no="04" title={c.tools.heading} sub={c.tools.text} />
+          <SectionHead title={c.tools.heading} sub={c.tools.text} />
           <ol className="tools reveal-group">
-            {c.tools.items.map((t) => <li key={t.name}><div><h3>{t.name}</h3><p>{t.d}</p></div></li>)}
+            {c.tools.items.map((t) => <li key={t.name}><h3>{t.name}</h3><p>{t.d}</p></li>)}
           </ol>
         </div>
       </section>
 
       <section className="cta-band" data-reveal>
-        <div className="wrap cta-band-in">
+        <div className="wrap"><div className="cta-band-in">
           <p>{c.cta}</p>
           <Actions sms={false} />
-        </div>
+        </div></div>
       </section>
 
       <div className="wrap content">
         <section className="sec">
-          <SectionHead no="05" title={c.cases.heading} sub={c.cases.sub} />
+          <SectionHead title={c.cases.heading} sub={c.cases.sub} />
           <div className="shots">
             {c.cases.items.map(({ c: k, caption }, i) => (
               <figure key={k.id} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
@@ -154,26 +151,26 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         </section>
 
         <section className="sec mist">
-          <SectionHead no="06" title={c.stepsHeading} />
+          <SectionHead title={c.stepsHeading} />
           <ol className="flow reveal-group">
             {c.steps.map((st) => <li key={st.title}><strong>{st.title}</strong><p>{st.text}</p></li>)}
           </ol>
         </section>
 
         <section className="sec">
-          <SectionHead no="07" title={`${P.name} 상담 안내`} />
+          <SectionHead title={`${P.name} 상담 안내`} />
           <dl className="info" data-reveal>{c.info.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
         </section>
 
         <section className="sec mist" id="faq">
-          <SectionHead no="08" title="자주 묻는 질문" />
+          <SectionHead title="자주 묻는 질문" />
           <div className="faq">
             {c.faq.map((f) => <details key={f.q} data-reveal><summary>{f.q}<i /></summary><p>{f.a}</p></details>)}
           </div>
         </section>
 
         <section className="sec">
-          <SectionHead no="09" title={`${p.kw} 관련 안내`} />
+          <SectionHead title={`${p.kw} 관련 안내`} />
           <div className="related">
             {rel.samePlace.length > 0 && <div><h3>{P.name} 다른 안내</h3><ul>{rel.samePlace.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}</ul></div>}
             {rel.sameCity.length > 0 && <div><h3>{p.city} 다른 동네</h3><ul>{rel.sameCity.map((x) => <li key={x.slug}><Link href={pagePath(x)}>{x.kw}<IconArrow /></Link></li>)}</ul></div>}

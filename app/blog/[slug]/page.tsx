@@ -60,10 +60,14 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           keywords: p.keyword,
         },
       ]} />
-      <div className="wrap content page-top">
-        <p className="eyebrow dark"><Link href="/blog/">블로그</Link></p>
-        <h1 className="page-title">{p.title}</h1>
-        <p className="prose-p">{fmt(p.publishedAt)} · {BRAND}</p>
+      <section className="page-hero">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/blog/">블로그</Link></nav>
+          <h1 className="page-title">{p.title}</h1>
+          <p className="page-lead">{fmt(p.publishedAt)} · {BRAND}</p>
+        </div>
+      </section>
+      <div className="wrap content">
         <article className="prose post">
           {p.sections.map((s, i) => (
             <section key={s.h} data-reveal>

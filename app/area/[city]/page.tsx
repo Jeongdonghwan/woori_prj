@@ -36,11 +36,15 @@ export default function CityHub({ params }: { params: { city: string } }) {
         breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '지역', path: '/area/' }, { name: `${city} 배관 막힘`, path: cityEncodedPath(city) }]),
         itemListJsonLd(pages.filter(inSitemap).map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
-      <div className="wrap content page-top">
-        <p className="eyebrow dark">{C.full}</p>
-        <h1 className="page-title">{city} 하수구·변기·싱크대 막힘 지역 안내</h1>
-        <p className="prose-p">{C.full}는 {C.traits}입니다. {C.route}. 아래에서 동네와 궁금한 내용(비용·업체·24시·긴급·뚫음)을 고르세요.</p>
-        <Actions />
+      <section className="page-hero">
+        <div className="wrap">
+          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><span>{city}</span><span>·</span><span className="crumbs-where">{C.full}</span></nav>
+          <h1 className="page-title">{city} 하수구·변기·싱크대 막힘 지역 안내</h1>
+          <p className="page-lead">{C.full}는 {C.traits}입니다. {C.route}. 아래에서 동네와 궁금한 내용(비용·업체·24시·긴급·뚫음)을 고르세요.</p>
+          <Actions />
+        </div>
+      </section>
+      <div className="wrap content">
         {photos.length > 0 && (
           <div className="shots hub-shots">
             {photos.map((k) => (
@@ -53,7 +57,7 @@ export default function CityHub({ params }: { params: { city: string } }) {
         )}
         {kinds.map((k, i) => (
           <section key={k} className="sec">
-            <SectionHead no={String(i + 1).padStart(2, '0')} title={`${city} ${KIND[k]}`} />
+            <SectionHead title={`${city} ${KIND[k]}`} />
             {keys.filter((x) => PLACES[x].kind === k).map((key) => (
               <div key={key} className="area-block" id={key} data-reveal>
                 <h3>{PLACES[key].name} <small>· {PLACES[key].homes}</small></h3>

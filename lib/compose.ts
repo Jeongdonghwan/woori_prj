@@ -357,7 +357,7 @@ export interface Composed {
   info: [string, string][];
   faq: { q: string; a: string }[];
   closing: { heading: string; text: string };
-  ticker: string[]; cta: string;
+  cta: string;
 }
 
 const nearCache = new Map<string, string[]>();
@@ -526,7 +526,6 @@ export function compose(p: Page): Composed {
     { heading: `막힌 배수구 사진 한 장과 ${nm} 주소`, text: `문자로 먼저 보내 주시면 통화 때 ${wl} 상황을 바로 이어서 설명드립니다.` },
   ], s, 'close');
 
-  const ticker = [nm, ...spots, ...nearby].slice(0, 9);
   const cta = pick({
     apt: [`${nm} 아파트, 싱크대·욕실이 같이 느리다면 공용 오수관까지 봐야 합니다.`, `${nm}에서 뚫어도 다시 막힌다면, 관벽에 남은 원인부터 확인합니다.`],
     store: [`${nm} 상가 화장실·주방 역류, 영업 전에 원인부터 잡습니다.`, `${nm} 공용배관 막힘, 실내만 뚫으면 다시 막힙니다.`],
@@ -536,6 +535,6 @@ export function compose(p: Page): Composed {
   return {
     title, description, h1: p.kw, eyebrow, lead, label: lb, wl, answer, summary, heroCase, intro, region, view,
     honest: svc.honest && (p.service !== '내시경' || p.word === '배관관로탐지') ? svc.honest(nm) : undefined,
-    symptoms, tools, cases, steps, stepsHeading: `${lb} 진행 순서`, info, faq, closing, ticker, cta,
+    symptoms, tools, cases, steps, stepsHeading: `${lb} 진행 순서`, info, faq, closing, cta,
   };
 }
