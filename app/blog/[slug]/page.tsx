@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPosts, getPost, postPath, postEncodedPath, ogKey } from '../../../lib/blog';
 import { breadcrumbJsonLd } from '../../../lib/jsonld';
-import { Actions, IconArrow, JsonLd } from '../../../components/Common';
+import { Actions, IconArrow, JsonLd, PhotoTop, pickPhotos } from '../../../components/Common';
 import { BRAND, SITE_URL, shareMeta } from '../../../lib/site';
 
 export const dynamicParams = false;
@@ -60,13 +60,11 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           keywords: p.keyword,
         },
       ]} />
-      <section className="page-hero">
-        <div className="wrap">
-          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/blog/">블로그</Link></nav>
-          <h1 className="page-title">{p.title}</h1>
-          <p className="page-lead">{fmt(p.publishedAt)} · {BRAND}</p>
-        </div>
-      </section>
+      <PhotoTop photos={pickPhotos(p.slug)} className="page-hero">
+        <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/blog/">블로그</Link></nav>
+        <h1 className="page-title">{p.title}</h1>
+        <p className="page-lead">{fmt(p.publishedAt)} · {BRAND}</p>
+      </PhotoTop>
       <div className="wrap content">
         <article className="prose post">
           {p.sections.map((s, i) => (

@@ -5,7 +5,7 @@ import { TOOLS } from '../lib/compose';
 import { getPosts, postPath } from '../lib/blog';
 import { BRAND, CONTACT, BLOG, shareMeta } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
-import { Actions, IconArrow, JsonLd, SectionHead, Svg } from '../components/Common';
+import { Actions, CaseImg, IconArrow, JsonLd, PhotoTop, SectionHead } from '../components/Common';
 
 const HOME_TITLE = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘 고압세척`;
 const HOME_DESC = '천안·아산 하수구 막힘, 변기·싱크대 막힘, 공용배관 고압세척. RIDGID 배관내시경으로 원인을 보고 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다. 24시간 상담, 당일·야간 긴급출동.';
@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   ...shareMeta('home', `${BRAND} 천안·아산 배관 막힘`, { title: HOME_TITLE, description: HOME_DESC, url: '/' }),
 };
 
-// 블로그 '우리설비' 글에 나온 작업 종류 그대로 (글 제목·본문 기준)
+// 블로그 시공 글에 나온 작업 종류 그대로 (글 제목·본문 기준), ph = 그 작업 사진(data/cases.json)
 const WORKS = [
-  { t: '하수구·바닥 배수구 막힘', d: '화장실 바닥 배수구 역류, 돌·모래·콘크리트 찌꺼기가 걸린 배관, 외부 맨홀까지 이어진 막힘', svc: '하수구', ic: 'M4 4h16v16H4zM8 8h8v8H8zM8 12h8M12 8v8' },
-  { t: '변기·소변기 막힘', d: '물티슈·슬러지로 막힌 변기는 변기를 떼어 오수관을 내시경으로 확인하고, 상가 소변기는 요석을 제거', svc: '변기막힘', ic: 'M6 3h5v6H6zM4 9h16c0 4-3 7-7 7h-2c-4 0-7-3-7-7zM9 16l-1 5h8l-1-5' },
-  { t: '싱크대 막힘', d: '아파트·상가 주방 하수관의 기름때와 음식물 찌꺼기를 플렉스샤프트·고압세척으로 걷어 냄', svc: '싱크대', ic: 'M4 14h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM12 14V7a3 3 0 0 1 6 0v2' },
-  { t: '공용배관·오수관 고압세척', d: '상가 지하 공용배관, 음식점 트렌치·그리스통, 아파트 오수배관과 외부 메인 맨홀까지 세척', svc: '고압세척', ic: 'M3 12h8l3-3v6l-3-3M17 8l4-2M17 12h4M17 16l4 2' },
-  { t: '배관내시경 진단', d: 'RIDGID 손잡이형·모니터형 내시경으로 막힌 위치와 원인을 보여 드리고 작업 뒤 다시 촬영', svc: '내시경', ic: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6' },
-  { t: '변기 수리 · 세면대 수전 교체', d: '물이 멈추지 않는 변기 볼탑·배수밸브 교체, 하부가 새는 세면대 수전·급수 호스 교체', svc: '변기수리', ic: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z' },
-  { t: '언 수도 녹임(해빙)', d: '겨울철 외부 노출 배관 동결을 배관 재질에 맞춰 천천히 녹이고 누수·균열을 재점검', svc: '', ic: 'M12 2v20M4.9 7l14.2 10M4.9 17L19.1 7M9 4l3 2 3-2M9 20l3-2 3 2' },
+  { t: '하수구·바닥 배수구 막힘', d: '화장실 바닥 배수구 역류, 돌·모래·콘크리트 찌꺼기가 걸린 배관, 외부 맨홀까지 이어진 막힘', svc: '하수구', ph: 'w06' },
+  { t: '변기·소변기 막힘', d: '물티슈·슬러지로 막힌 변기는 변기를 떼어 오수관을 내시경으로 확인하고, 상가 소변기는 요석을 제거', svc: '변기막힘', ph: 'w44' },
+  { t: '싱크대 막힘', d: '아파트·상가 주방 하수관의 기름때와 음식물 찌꺼기를 플렉스샤프트·고압세척으로 걷어 냄', svc: '싱크대', ph: 'w18' },
+  { t: '공용배관·오수관 고압세척', d: '상가 지하 공용배관, 음식점 트렌치·그리스통, 아파트 오수배관과 외부 메인 맨홀까지 세척', svc: '고압세척', ph: 'w26' },
+  { t: '배관내시경 진단', d: 'RIDGID 손잡이형·모니터형 내시경으로 막힌 위치와 원인을 보여 드리고 작업 뒤 다시 촬영', svc: '내시경', ph: 'w47' },
+  { t: '변기 수리 · 세면대 수전 교체', d: '물이 멈추지 않는 변기 볼탑·배수밸브 교체, 하부가 새는 세면대 수전·급수 호스 교체', svc: '변기수리', ph: 'w49' },
+  { t: '언 수도 녹임(해빙)', d: '겨울철 외부 노출 배관 동결을 배관 재질에 맞춰 천천히 녹이고 누수·균열을 재점검', svc: '', ph: 'w62' },
 ];
 
 const FAQ = [
@@ -51,34 +51,20 @@ export default function Home() {
   const svcLink = (svc: string) => OPEN_PAGES.find((p) => inSitemap(p) && p.city === '천안' && p.service === svc && p.unit === '시·군' && !p.mod)
     || OPEN_PAGES.find((p) => inSitemap(p) && p.service === svc);
   const gallery = CASES.filter((_, i) => i % 3 === 0).slice(0, 9);
-  const sub = CASES[6];
 
   return (
     <main>
       <JsonLd data={[faqJsonLd(FAQ), itemListJsonLd(carousel.map((p) => ({ name: p.kw, path: pageEncodedPath(p) })))]} />
-      <section className="hero hero-home">
-        <div className="wrap hero-grid">
-          <div className="hero-text">
-            <h1><span><i>막힌 원인부터 보고</i></span><span><i>뚫는 {BRAND}</i></span></h1>
-            <p className="hero-lead">하수구·변기·싱크대 막힘과 공용배관 고압세척. RIDGID 배관내시경으로 관 속을 먼저 보여 드리고, 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다.</p>
-            <Actions blog />
-          </div>
-          <div className="hero-collage">
-            <figure className="hero-photo mask">
-              <img src="/img/w03.webp" alt={`${BRAND} 기사가 천안 불당동 매장 외부 맨홀 옆에 배관내시경을 세팅한 모습`} width={CASES[2].w} height={CASES[2].h} />
-              <figcaption><b>블로그 시공 사진</b>천안 불당동 매장 · 2025.12.03</figcaption>
-            </figure>
-            <figure className="hero-sub">
-              <img src={`/img/${sub.id}.webp`} alt={`${BRAND} 시공 사진 - ${sub.where} ${sub.space}`} width={sub.w} height={sub.h} />
-            </figure>
-          </div>
+      <PhotoTop photos={['s2', 'w43', 's1']} className="hero hero-home">
+        <div className="hero-text">
+          <h1><span><i>막힌 원인부터 보고</i></span><span><i>뚫는 {BRAND}</i></span></h1>
+          <p className="hero-lead">하수구·변기·싱크대 막힘과 공용배관 고압세척. RIDGID 배관내시경으로 관 속을 먼저 보여 드리고, 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다.</p>
+          <Actions blog />
         </div>
-        <div className="wrap">
-          <dl className="hero-specs">
-            {[['지역', '천안·아산 전 지역', 'M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21zM12 7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5'], ['장비', '배관내시경 · 고압세척기', 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6'], ['상담', '24시간 · 당일·야간 출동', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2']].map(([k, v, d]) => <div key={k}><Svg d={d} size={26} /><dt>{k}</dt><dd>{v}</dd></div>)}
-          </dl>
-        </div>
-      </section>
+        <dl className="hero-specs">
+          {[['지역', '천안·아산 전 지역', 'w37'], ['장비', '배관내시경 · 고압세척기', 'w12'], ['상담', '24시간 · 당일·야간 출동', 'w29']].map(([k, v, ph]) => <div key={k}><CaseImg id={ph} className="spec-ph" lazy={false} /><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      </PhotoTop>
 
       <div className="wrap content">
         <section className="sec">
@@ -97,13 +83,13 @@ export default function Home() {
         </section>
 
         <section className="sec mist">
-          <SectionHead title="하는 일" sub="블로그 '우리설비' 시공 글에 올라온 작업입니다." />
+          <SectionHead title="하는 일" sub="블로그 시공 글에 올라온 작업입니다." />
           <ol className="works">
             {WORKS.map((w, i) => {
               const lk = w.svc ? svcLink(w.svc) : undefined;
               return (
                 <li key={w.t} data-reveal style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
-                  <span className="works-ic"><Svg d={w.ic} size={30} /></span>
+                  <CaseImg id={w.ph} className="works-ph" />
                   <h3>{w.t}</h3>
                   <p>{w.d}</p>
                   {lk && <Link href={pagePath(lk)} className="more">{lk.kw} 안내 <IconArrow /></Link>}
@@ -117,7 +103,7 @@ export default function Home() {
       <section className="band">
         <div className="wrap">
           <SectionHead title="현장 장비" sub="블로그 글과 사진에 나오는 장비입니다." />
-          <ol className="tools reveal-group">{TOOLS.map((t, i) => <li key={t.name}><h3>{t.name}</h3><p>{t.d[i % 3]('천안·아산', '막힘')}</p></li>)}</ol>
+          <ol className="tools reveal-group">{TOOLS.map((t, i) => <li key={t.name}><CaseImg id={t.ph} className="tools-ph" /><h3>{t.name}</h3><p>{t.d[i % 3]('천안·아산', '막힘')}</p></li>)}</ol>
         </div>
       </section>
 
@@ -145,7 +131,7 @@ export default function Home() {
 
       <div className="wrap content">
         <section className="sec mist">
-          <SectionHead title="작업 원칙" sub="블로그에 적어 둔 우리설비 작업 원칙입니다." />
+          <SectionHead title="작업 원칙" sub="블로그에 적어 둔 작업 원칙입니다." />
           <ol className="timeline reveal-group">
             {PRINCIPLES.map((x) => <li key={x.t}><strong>{x.t}</strong><p>{x.d}</p></li>)}
           </ol>

@@ -1,0 +1,32 @@
+{
+ "note": "위키미디어 공용 퍼블릭 도메인·CC0 사진 (업체 현장 사진 아님 — 배경·분위기용, 시공 사진으로 표기하지 않음)",
+ "photos": [
+  {
+   "id": "s1",
+   "alt": "배관 막힘 작업에 쓰는 드레인 클리너 장비",
+   "w": 1600,
+   "h": 1200,
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Handyman_heavy_duty_drain_cleaning_machine.jpg",
+   "title": "File:Handyman heavy duty drain cleaning machine.jpg"
+  },
+  {
+   "id": "s2",
+   "alt": "건물 기계실 천장을 지나는 급수·배수 배관",
+   "w": 1600,
+   "h": 1071,
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Pipes_various.jpg",
+   "title": "File:Pipes various.jpg"
+  },
+  {
+   "id": "s3",
+   "alt": "배관 작업용 파이프 렌치",
+   "w": 1600,
+   "h": 1021,
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Pipe_Wrench.jpg",
+   "title": "File:Pipe Wrench.jpg"
+  }
+ ]
+}

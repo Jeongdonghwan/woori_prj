@@ -1,6 +1,8 @@
 // 공통 UI — 이모지 없이 선 아이콘, 모서리 10px 버튼, 가운데 정렬 섹션 머리(번호 없음).
 import Link from 'next/link';
 import { BRAND, CONTACT, BUSINESS, BLOG, tel, smsHref } from '../lib/site';
+import { CASES } from '../lib/data';
+import stockData from '../data/stock.json';
 
 export const JsonLd = ({ data }: { data: object | object[] }) => (
   <>{(Array.isArray(data) ? data : [data]).map((d, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d).replace(/</g, '\\u003c') }} />)}</>
@@ -23,6 +25,32 @@ export const Actions = ({ sms = true, blog = false }: { sms?: boolean; blog?: bo
   </div>
 );
 
+// 사진 한 장 — w## = 블로그 시공 사진(data/cases.json), s# = 무료 배경 사진(data/stock.json, 퍼블릭 도메인 · 업체 현장 사진 아님)
+export const CaseImg = ({ id, className, lazy = true }: { id: string; className?: string; lazy?: boolean }) => {
+  const st = stockData.photos.find((x) => x.id === id);
+  const k = st ? null : CASES.find((x) => x.id === id)!;
+  const alt = st ? st.alt : `${BRAND} 현장 사진 - ${k!.where} ${k!.space}`;
+  return <img src={`/img/${id}.webp`} className={className} alt={alt} width={st ? st.w : k!.w} height={st ? st.h : k!.h} loading={lazy ? 'lazy' : undefined} />;
+};
+
+// 페이지 최상단 — 현장 장비 사진 3장을 깔고 짙은 남색으로 덮은 머리 띠. 모든 페이지 공통.
+export const PRO_PHOTOS = ['s1', 's2', 's3', 'w43', 'w03', 'w26', 'w29', 'w18', 'w44', 'w12'];
+export const pickPhotos = (seed: string, first?: string) => {
+  let h = 2166136261;
+  for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  const pool = PRO_PHOTOS.filter((x) => x !== first);
+  const out = first ? [first] : [];
+  if (!out.some((x) => x.startsWith('s'))) out.push(['s1', 's2', 's3'][h % 3]);
+  for (let i = 0; out.length < 3; i++) { const rest = pool.filter((x) => !out.includes(x)); out.push(rest[(h + i * 7) % rest.length]); }
+  return out;
+};
+export const PhotoTop = ({ photos, children, className = '' }: { photos: string[]; children: React.ReactNode; className?: string }) => (
+  <section className={`ptop ${className}`}>
+    <div className="ptop-bg">{photos.map((id) => <CaseImg key={id} id={id} lazy={false} />)}</div>
+    <div className="wrap ptop-in">{children}</div>
+  </section>
+);
+
 export const SectionHead = ({ title, sub, left }: { title: string; sub?: string; left?: boolean }) => (
   <header className={left ? 'sh sh-left' : 'sh'} data-reveal>
     <h2>{title}</h2>
@@ -34,7 +62,7 @@ export const Header = () => (
   <header className="site-header">
     <div className="wrap header-inner">
       <Link href="/" className="logo" aria-label={`${BRAND} 홈`}>
-        <img src="/img/logo-mark.png" className="logo-img" alt="우리설비 WOORI 로고" width={40} height={37} />
+        <img src="/img/logo-mark.png" className="logo-img" alt={`${BRAND} WOORI 로고`} width={40} height={37} />
         <span className="logo-text"><b>{BRAND}</b><small>하수구·변기·싱크대 막힘 · 고압세척</small></span>
       </Link>
       <nav className="nav" aria-label="주 메뉴">
@@ -58,7 +86,6 @@ export const Footer = () => (
       <ul className="foot-info">
         <li><span>상호</span>{BRAND}</li>
         {BUSINESS.bizNumber && <li><span>사업자</span>{BUSINESS.bizNumber}</li>}
-        <li><span>지역</span>{BUSINESS.streetAddress || BUSINESS.region}</li>
         <li><span>전화</span><a href={tel}>{CONTACT.phone}</a></li>
         <li><span>블로그</span><a href={BLOG} target="_blank" rel="noopener noreferrer">blog.naver.com/gook1008</a></li>
       </ul>

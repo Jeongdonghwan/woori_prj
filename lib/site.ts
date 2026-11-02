@@ -4,7 +4,7 @@
 
 // TODO(도메인 미정): SITE_URL 환경변수로 넘기거나 기본값 교체. 배포: bash scripts/deploy.sh <묶음> <URL>
 export const SITE_URL = process.env.SITE_URL || 'http://172.237.20.244:8107';
-export const BRAND = '우리설비';
+export const BRAND = '우리배관설비'; // 사용자 지정 사이트 이름 (블로그 상호는 '우리설비')
 export const SITE_NAME = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘`;
 
 export const BLOG = 'https://blog.naver.com/gook1008';

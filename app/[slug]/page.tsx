@@ -5,7 +5,7 @@ import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, canonicalPath, 
 import { compose } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, IconArrow, JsonLd, SectionHead } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead, CaseImg, PhotoTop, pickPhotos } from '../../components/Common';
 
 export const dynamicParams = false;
 
@@ -57,22 +57,16 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         ]}
       />
 
-      <section className="hero">
-        <div className="wrap hero-grid">
-          <div className="hero-text">
-            <nav className="crumbs" aria-label="경로">
-              <Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><Link href={cityPath(p.city)}>{p.city}</Link><span>·</span><span className="crumbs-where">{c.eyebrow}</span>
-            </nav>
-            <h1><span><i>{first}</i></span>{h1b && <span><i>{h1b}</i></span>}</h1>
-            <p className="hero-lead">{c.lead}</p>
-            <Actions />
-          </div>
-          <figure className="hero-photo mask">
-            <img src={`/img/${c.heroCase.id}.webp`} alt={`${p.kw} 관련 ${BRAND} 시공 사진 - ${c.heroCase.space}`} width={c.heroCase.w} height={c.heroCase.h} />
-            <figcaption><b>블로그 시공 사진</b>{c.heroCase.where} · {fmt(c.heroCase.date)}</figcaption>
-          </figure>
+      <PhotoTop photos={pickPhotos(p.slug, c.heroCase.id)} className="hero">
+        <div className="hero-text">
+          <nav className="crumbs" aria-label="경로">
+            <Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><Link href={cityPath(p.city)}>{p.city}</Link><span>·</span><span className="crumbs-where">{c.eyebrow}</span>
+          </nav>
+          <h1><span><i>{first}</i></span>{h1b && <span><i>{h1b}</i></span>}</h1>
+          <p className="hero-lead">{c.lead}</p>
+          <Actions />
         </div>
-      </section>
+      </PhotoTop>
 
       <div className="wrap">
         <section className="answer" aria-label="요약" data-reveal>
@@ -124,7 +118,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         <div className="wrap">
           <SectionHead title={c.tools.heading} sub={c.tools.text} />
           <ol className="tools reveal-group">
-            {c.tools.items.map((t) => <li key={t.name}><h3>{t.name}</h3><p>{t.d}</p></li>)}
+            {c.tools.items.map((t) => <li key={t.name}><CaseImg id={t.ph} className="tools-ph" /><h3>{t.name}</h3><p>{t.d}</p></li>)}
           </ol>
         </div>
       </section>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CITIES, CASES, PLACES, openCities, cityPages, cityEncodedPath, pagePath, pageEncodedPath, inSitemap } from '../../../lib/data';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
-import { Actions, IconArrow, JsonLd, SectionHead } from '../../../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead, PhotoTop, pickPhotos } from '../../../components/Common';
 import { BRAND, shareMeta } from '../../../lib/site';
 
 export const dynamicParams = false;
@@ -36,14 +36,12 @@ export default function CityHub({ params }: { params: { city: string } }) {
         breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '지역', path: '/area/' }, { name: `${city} 배관 막힘`, path: cityEncodedPath(city) }]),
         itemListJsonLd(pages.filter(inSitemap).map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
-      <section className="page-hero">
-        <div className="wrap">
-          <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><span>{city}</span><span>·</span><span className="crumbs-where">{C.full}</span></nav>
-          <h1 className="page-title">{city} 하수구·변기·싱크대 막힘 지역 안내</h1>
-          <p className="page-lead">{C.full}는 {C.traits}입니다. {C.route}. 아래에서 동네와 궁금한 내용(비용·업체·24시·긴급·뚫음)을 고르세요.</p>
-          <Actions />
-        </div>
-      </section>
+      <PhotoTop photos={pickPhotos(city)} className="page-hero">
+        <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><span>{city}</span><span>·</span><span className="crumbs-where">{C.full}</span></nav>
+        <h1 className="page-title">{city} 하수구·변기·싱크대 막힘 지역 안내</h1>
+        <p className="page-lead">{C.full}는 {C.traits}입니다. {C.route}. 아래에서 동네와 궁금한 내용(비용·업체·24시·긴급·뚫음)을 고르세요.</p>
+        <Actions />
+      </PhotoTop>
       <div className="wrap content">
         {photos.length > 0 && (
           <div className="shots hub-shots">

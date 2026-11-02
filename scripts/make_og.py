@@ -1,7 +1,7 @@
 """페이지별 og 이미지(1200x630 JPEG) → public/og/<key>.jpg  (home, area, cases, blog, area-<시구>, <키워드 슬러그>, blog-<글 슬러그>)
    python -I scripts/make_og.py           # 없는 것만 생성
    python -I scripts/make_og.py --force   # 전부 다시
-배경 = 우리설비 블로그 시공 사진(public/img/w*.jpg) 어둡게, 글자 = 굵은 한글 키워드.
+배경 = 우리배관설비 블로그 시공 사진(public/img/w*.jpg) 어둡게, 글자 = 굵은 한글 키워드.
 네이버는 og 이미지를 가운데 정사각형으로 잘라 보여 주므로 글자는 가운데 630px 안쪽에 둔다.
 """
 import datetime, json, os, re, sys
@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'public' / 'og'
 W, H = 1200, 630
 SAFE_L, SAFE_W = 300, 600  # 가운데 정사각형(285~915) 안쪽
-BRAND, PHONE = '우리설비', '010-9234-7119'  # lib/site.ts 와 맞출 것
+BRAND, PHONE = '우리배관설비', '010-9234-7119'  # lib/site.ts 와 맞출 것
 NAVY, ACCENT = (0, 31, 128), (60, 188, 240)  # 로고 남색·하늘색
 # 윈도우는 맑은 고딕, 리눅스(예약 작업)는 Noto CJK — fonts-noto-cjk 패키지
 _FONTS = [(r'C:\Windows\Fonts\malgunbd.ttf', r'C:\Windows\Fonts\malgun.ttf'),
