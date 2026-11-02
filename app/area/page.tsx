@@ -30,7 +30,7 @@ export default function AreaIndex() {
       <PhotoTop photo={pickPhoto('area')} className="page-hero">
         <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>지역</span></nav>
         <h1 className="page-title">지역별 하수구·변기·싱크대 막힘 안내</h1>
-        <p className="page-lead">{BRAND} 블로그에는 천안·아산 전 지역 출동으로 적혀 있습니다. 청주·평택·세종·공주·예산 페이지는 출동 가능 여부를 통화로 먼저 확인하도록 안내합니다.</p>
+        <p className="page-lead">천안·아산 전 지역 출동합니다. 청주·평택·세종·공주·예산은 출동 가능 여부를 통화로 먼저 확인해 주세요.</p>
         <Actions />
       </PhotoTop>
       <div className="wrap content">

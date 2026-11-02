@@ -35,7 +35,7 @@ export default function Cases() {
       <PhotoTop photo={pickPhoto('cases')} className="page-hero">
         <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>시공 사례</span><span>·</span><span className="crumbs-where">네이버 블로그 gook1008</span></nav>
         <h1 className="page-title">시공 사례</h1>
-        <p className="page-lead">네이버 블로그(gook1008)에 올린 시공 글({fmt(posts[posts.length - 1][0].date)} ~ {fmt(posts[0][0].date)})의 현장 사진입니다. 지도 캡처, 출동 차량(번호판이 보일 수 있는 사진), 화면 캡처는 뺐습니다. 글마다 원문 링크를 붙였습니다.</p>
+        <p className="page-lead">{fmt(posts[posts.length - 1][0].date)}부터 {fmt(posts[0][0].date)}까지 천안·아산에서 작업한 현장 사진입니다.</p>
       </PhotoTop>
       <div className="wrap content">
         <ol className="case-list">

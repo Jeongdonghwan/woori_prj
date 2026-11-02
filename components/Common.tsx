@@ -59,7 +59,7 @@ export const Header = () => (
     <div className="wrap header-inner">
       <Link href="/" className="logo" aria-label={`${BRAND} 홈`}>
         <img src="/img/logo-mark.png" className="logo-img" alt={`${BRAND} WOORI 로고`} width={40} height={37} />
-        <span className="logo-text"><b>{BRAND}</b><small>하수구·변기·싱크대 막힘 · 고압세척</small></span>
+        <span className="logo-text"><b>{BRAND}</b><small>하수구·변기·싱크대 막힘 · 고압세척 · 누수탐지</small></span>
       </Link>
       <nav className="nav" aria-label="주 메뉴">
         <Link href="/cases/" className="hide-m">시공 사례</Link>
@@ -76,7 +76,7 @@ export const Footer = () => (
     <div className="wrap foot-grid">
       <div>
         <strong className="foot-brand">{BRAND}</strong>
-        <p>하수구 막힘 · 변기 막힘 · 싱크대 막힘 · 고압세척 · 배관내시경<br />천안·아산 전 지역 출동 · {CONTACT.hours} · 당일·야간 긴급출동</p>
+        <p>하수구 막힘 · 변기 막힘 · 싱크대 막힘 · 고압세척 · 누수탐지 · 배관내시경<br />천안·아산 전 지역 출동 · {CONTACT.hours} · 당일·야간 긴급출동</p>
         <p><Link href="/area/">지역 안내</Link> · <Link href="/cases/">시공 사례</Link> · <Link href="/blog/">블로그</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       <ul className="foot-info">
