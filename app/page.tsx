@@ -23,7 +23,7 @@ const WORKS = [
   { t: '싱크대 막힘', d: '아파트·상가 주방 하수관의 기름때와 음식물 찌꺼기를 플렉스샤프트·고압세척으로 걷어 냄', svc: '싱크대', ph: 'w18' },
   { t: '공용배관·오수관 고압세척', d: '상가 지하 공용배관, 음식점 트렌치·그리스통, 아파트 오수배관과 외부 메인 맨홀까지 세척', svc: '고압세척', ph: 'w26' },
   { t: '배관내시경 진단', d: 'RIDGID 손잡이형·모니터형 내시경으로 막힌 위치와 원인을 보여 드리고 작업 뒤 다시 촬영', svc: '내시경', ph: 'w47' },
-  { t: '변기 수리 · 세면대 수전 교체', d: '물이 멈추지 않는 변기 볼탑·배수밸브 교체, 하부가 새는 세면대 수전·급수 호스 교체', svc: '변기수리', ph: 'w49' },
+  { t: '변기 수리 · 세면대 수전 교체', d: '물이 멈추지 않는 변기 볼탑·배수밸브 교체, 하부가 새는 세면대 수전·급수 호스 교체', svc: '변기수리', ph: 'w61' },
   { t: '언 수도 녹임(해빙)', d: '겨울철 외부 노출 배관 동결을 배관 재질에 맞춰 천천히 녹이고 누수·균열을 재점검', svc: '', ph: 'w62' },
 ];
 
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <main>
       <JsonLd data={[faqJsonLd(FAQ), itemListJsonLd(carousel.map((p) => ({ name: p.kw, path: pageEncodedPath(p) })))]} />
-      <PhotoTop photos={['s2', 'w43', 's1']} className="hero hero-home">
+      <PhotoTop photo="w03" className="hero hero-home">
         <div className="hero-text">
           <h1><span><i>막힌 원인부터 보고</i></span><span><i>뚫는 {BRAND}</i></span></h1>
           <p className="hero-lead">하수구·변기·싱크대 막힘과 공용배관 고압세척. RIDGID 배관내시경으로 관 속을 먼저 보여 드리고, 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다.</p>

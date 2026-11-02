@@ -5,7 +5,7 @@ import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, canonicalPath, 
 import { compose } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
-import { Actions, IconArrow, JsonLd, SectionHead, CaseImg, PhotoTop, pickPhotos } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, SectionHead, CaseImg, PhotoTop, pickPhoto } from '../../components/Common';
 
 export const dynamicParams = false;
 
@@ -57,7 +57,7 @@ export default function KeywordPage({ params }: { params: { slug: string } }) {
         ]}
       />
 
-      <PhotoTop photos={pickPhotos(p.slug, c.heroCase.id)} className="hero">
+      <PhotoTop photo={pickPhoto(p.slug)} className="hero">
         <div className="hero-text">
           <nav className="crumbs" aria-label="경로">
             <Link href="/">홈</Link><span>/</span><Link href="/area/">지역</Link><span>/</span><Link href={cityPath(p.city)}>{p.city}</Link><span>·</span><span className="crumbs-where">{c.eyebrow}</span>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CITIES, OPEN_PAGES, PLACES, openCities, cityPages, cityPath, cityEncodedPath, pagePath, pageEncodedPath, inSitemap } from '../../lib/data';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
-import { Actions, IconArrow, JsonLd, PhotoTop, pickPhotos } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, PhotoTop, pickPhoto } from '../../components/Common';
 import { BRAND, shareMeta } from '../../lib/site';
 
 const TITLE = `지역별 하수구·변기·싱크대 막힘 안내 | ${BRAND}`;
@@ -27,7 +27,7 @@ export default function AreaIndex() {
           ...top.map((p) => ({ name: p.kw, path: pageEncodedPath(p) })),
         ]),
       ]} />
-      <PhotoTop photos={pickPhotos('area')} className="page-hero">
+      <PhotoTop photo={pickPhoto('area')} className="page-hero">
         <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>지역</span></nav>
         <h1 className="page-title">지역별 하수구·변기·싱크대 막힘 안내</h1>
         <p className="page-lead">{BRAND} 블로그에는 천안·아산 전 지역 출동으로 적혀 있습니다. 청주·평택·세종·공주·예산 페이지는 출동 가능 여부를 통화로 먼저 확인하도록 안내합니다.</p>

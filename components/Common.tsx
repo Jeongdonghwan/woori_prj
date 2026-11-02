@@ -33,20 +33,16 @@ export const CaseImg = ({ id, className, lazy = true }: { id: string; className?
   return <img src={`/img/${id}.webp`} className={className} alt={alt} width={st ? st.w : k!.w} height={st ? st.h : k!.h} loading={lazy ? 'lazy' : undefined} />;
 };
 
-// 페이지 최상단 — 현장 장비 사진 3장을 깔고 짙은 남색으로 덮은 머리 띠. 모든 페이지 공통.
-export const PRO_PHOTOS = ['s1', 's2', 's3', 'w43', 'w03', 'w26', 'w29', 'w18', 'w44', 'w12'];
-export const pickPhotos = (seed: string, first?: string) => {
+// 페이지 최상단 — 왼쪽 남색 바탕에 글, 오른쪽에 장비 사진 1장. 모든 페이지 공통.
+export const PRO_PHOTOS = ['w03', 'w43', 'w18', 'w26', 'w44', 'w07', 's1'];
+export const pickPhoto = (seed: string) => {
   let h = 2166136261;
   for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
-  const pool = PRO_PHOTOS.filter((x) => x !== first);
-  const out = first ? [first] : [];
-  if (!out.some((x) => x.startsWith('s'))) out.push(['s1', 's2', 's3'][h % 3]);
-  for (let i = 0; out.length < 3; i++) { const rest = pool.filter((x) => !out.includes(x)); out.push(rest[(h + i * 7) % rest.length]); }
-  return out;
+  return PRO_PHOTOS[h % PRO_PHOTOS.length];
 };
-export const PhotoTop = ({ photos, children, className = '' }: { photos: string[]; children: React.ReactNode; className?: string }) => (
+export const PhotoTop = ({ photo, children, className = '' }: { photo: string; children: React.ReactNode; className?: string }) => (
   <section className={`ptop ${className}`}>
-    <div className="ptop-bg">{photos.map((id) => <CaseImg key={id} id={id} lazy={false} />)}</div>
+    <div className="ptop-bg"><CaseImg id={photo} lazy={false} /></div>
     <div className="wrap ptop-in">{children}</div>
   </section>
 );

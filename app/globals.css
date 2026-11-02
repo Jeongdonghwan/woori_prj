@@ -91,13 +91,13 @@ h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.3; }
 @media (max-width: 560px) { .btn-primary { width: 100%; justify-content: center; } .actions { gap: 10px 20px; } }
 
 /* ---------- 히어로 ---------- */
-/* 페이지 최상단 머리 띠 — 현장 장비 사진 3장 위에 짙은 남색 그라데이션 (모든 페이지) */
+/* 페이지 최상단 머리 띠 — 왼쪽 남색 바탕 + 오른쪽 장비 사진 1장 (모든 페이지) */
 .ptop { position: relative; overflow: hidden; background: var(--deep); color: #fff; }
-.ptop-bg { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ptop-bg { position: absolute; top: 0; right: 0; bottom: 0; width: 48%; }
 .ptop-bg img { width: 100%; height: 100%; object-fit: cover; animation: settle 2.4s var(--ease) both; }
-.ptop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,22,64,.9) 0%, rgba(10,22,64,.66) 45%, rgba(0,31,128,.12) 100%); }
+.ptop::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 48%; background: linear-gradient(90deg, var(--deep) 0%, rgba(10,22,64,.55) 22%, rgba(10,22,64,0) 55%); }
 .ptop-in { position: relative; z-index: 2; }
-.ptop h1, .ptop .hero-lead, .ptop .page-lead { text-shadow: 0 2px 18px rgba(10,22,64,.55); }
+.ptop .hero-text, .ptop .page-title, .ptop .page-lead, .ptop .crumbs { max-width: 600px; }
 .ptop .crumbs, .ptop .crumbs .crumbs-where { color: rgba(255,255,255,.72); }
 .ptop .crumbs span { color: rgba(255,255,255,.4); }
 .ptop .crumbs a:hover { color: var(--sky); }
@@ -129,9 +129,8 @@ h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.3; }
 .hero-specs dd { align-self: start; margin: 0; font-weight: 700; color: var(--navy); }
 @media (max-width: 900px) {
   .hero { padding: 56px 0 48px; }
-  .ptop-bg { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ptop-bg img:nth-child(3) { display: none; }
-  .ptop::after { background: linear-gradient(180deg, rgba(10,22,64,.82) 0%, rgba(10,22,64,.7) 100%); }
+  .ptop-bg, .ptop::after { width: 100%; }
+  .ptop::after { background: linear-gradient(180deg, rgba(10,22,64,.86) 0%, rgba(10,22,64,.78) 100%); }
   .hero-specs { grid-template-columns: 1fr; margin-top: 40px; }
   .hero-specs div + div { border-left: 0; border-top: 1px solid var(--line); }
   .hero-specs div { grid-template-columns: 60px 1fr; padding: 14px 16px; }

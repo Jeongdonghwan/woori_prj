@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getPosts, postPath, postEncodedPath } from '../../lib/blog';
 import { OPEN_PAGES, inSitemap, pagePath, pageEncodedPath } from '../../lib/data';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
-import { Actions, IconArrow, JsonLd, PhotoTop, pickPhotos } from '../../components/Common';
+import { Actions, IconArrow, JsonLd, PhotoTop, pickPhoto } from '../../components/Common';
 import { BRAND, BLOG, shareMeta } from '../../lib/site';
 
 const TITLE = `배관 막힘 궁금증 블로그 | ${BRAND}`;
@@ -29,7 +29,7 @@ export default function BlogIndex() {
           ? posts.map((p) => ({ name: p.title, path: postEncodedPath(p) }))
           : hubs.map((p) => ({ name: p.kw, path: pageEncodedPath(p) }))),
       ]} />
-      <PhotoTop photos={pickPhotos('blog')} className="page-hero">
+      <PhotoTop photo={pickPhoto('blog')} className="page-hero">
         <nav className="crumbs" aria-label="경로"><Link href="/">홈</Link><span>/</span><span>블로그</span></nav>
         <h1 className="page-title">배관 막힘 궁금증 블로그</h1>
         <p className="page-lead">상담 전화에서 자주 듣는 질문을 한 편에 하나씩 답합니다. 막힘 원인·예방·업체 부르기 전 확인할 것처럼 집집마다 공통인 내용이고, 현장마다 다른 비용 숫자는 적지 않습니다.</p>
