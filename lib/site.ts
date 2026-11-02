@@ -3,7 +3,7 @@
 //   상호 '우리설비', 전화 010-9234-7119 (글마다 표기), 글 지도 첨부 위치 2곳(천안 서북구 불당17길 14 / 쌍용13길 21 1층).
 
 // TODO(도메인 미정): SITE_URL 환경변수로 넘기거나 기본값 교체. 배포: bash scripts/deploy.sh <묶음> <URL>
-export const SITE_URL = process.env.SITE_URL || 'https://woori-demo.example';
+export const SITE_URL = process.env.SITE_URL || 'http://172.237.20.244:8107';
 export const BRAND = '우리설비';
 export const SITE_NAME = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘`;
 
