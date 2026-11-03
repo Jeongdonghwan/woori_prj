@@ -293,7 +293,7 @@ function viewFor(p: Page, P: Place, C: City, lb: string, nm: string, wl: string,
         ['끝까지 확인하나', `원인 확인 → 제거 → 재확인, ${wl} 작업 뒤 다시 촬영`],
         ['추가요금이 붙나', `불필요한 공사·추가요금 없음, ${nm} 비용은 작업 전 안내`],
         ['누가 오나', '사장 직접 출동·책임 시공'],
-        ['언제 오나', C.served ? `${nm} 포함 ${p.city} 전 지역, 당일·야간 긴급출동` : `${j(nm, '은')} 출동 가능 여부를 통화로 먼저 확인`],
+        ['언제 오나', C.served ? `${nm === p.city ? "" : nm + " 포함 "}${p.city} 전 지역, 당일·야간 긴급출동` : `${j(nm, '은')} 출동 가능 여부를 통화로 먼저 확인`],
       ],
     };
   }
@@ -426,7 +426,7 @@ export function compose(p: Page): Composed {
   };
   const answer = answerBy[g];
   const summary: [string, string][] = [
-    ['출동', C.served ? `${nm} 포함 ${p.city} 전 지역` : `${nm} · 출동 가능 여부 통화 확인`],
+    ['출동', C.served ? `${nm === p.city ? "" : nm + " 포함 "}${p.city} 전 지역` : `${nm} · 출동 가능 여부 통화 확인`],
     ['장비', svc.tools.slice(0, 2).map((i) => TOOLS[i].name).join(' · ')],
     ['비용', '현장 확인 후 작업 전 안내 · 추가요금 없음'],
     ['상담', `${CONTACT.phone} · ${CONTACT.hours}${C.served ? ' · 당일·야간 출동' : ''}`],
@@ -501,7 +501,7 @@ export function compose(p: Page): Composed {
     ['주변', spots.join(' · ')],
     ['먼저 볼 곳', `${nm} ${CTX_SPOT[cx]}`],
     ['함께 하는 일', `${wl} · 하수구·변기·싱크대 막힘 · 고압세척 · 배관내시경 (${nm})`],
-    ['출동', C.served ? `${nm} 포함 ${p.city} 전 지역` : `${nm}: 출동 가능 여부 통화 확인`],
+    ['출동', C.served ? `${nm === p.city ? "" : nm + " 포함 "}${p.city} 전 지역` : `${nm}: 출동 가능 여부 통화 확인`],
   ];
 
   // ---- FAQ ----
