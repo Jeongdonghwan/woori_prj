@@ -426,10 +426,10 @@ export function compose(p: Page): Composed {
   };
   const answer = answerBy[g];
   const summary: [string, string][] = [
-    ['출동', `${nm} — ${C.route}`],
-    ['장비', `${svc.tools.slice(0, 2).map((i) => TOOLS[i].name).join(' · ')} 등 (${wl})`],
-    ['비용', `${nm} 현장 확인 후 작업 전 안내 · 불필요한 추가요금 없음`],
-    ['상담', `${CONTACT.phone} · ${CONTACT.hours}${C.served ? ' · 당일·야간 긴급출동' : ''}`],
+    ['출동', C.served ? `${nm} 포함 ${p.city} 전 지역` : `${nm} · 출동 가능 여부 통화 확인`],
+    ['장비', svc.tools.slice(0, 2).map((i) => TOOLS[i].name).join(' · ')],
+    ['비용', '현장 확인 후 작업 전 안내 · 추가요금 없음'],
+    ['상담', `${CONTACT.phone} · ${CONTACT.hours}${C.served ? ' · 당일·야간 출동' : ''}`],
   ];
 
   // ---- 도입 ----
