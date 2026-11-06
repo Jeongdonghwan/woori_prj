@@ -63,7 +63,7 @@ export default function Home() {
           <Actions blog />
         </div>
         <dl className="hero-specs">
-          {[['지역', '천안·아산 전 지역', 'w37'], ['장비', '배관내시경 · 고압세척기', 'w12'], ['상담', '24시간 · 당일·야간 출동', 'w29']].map(([k, v, ph]) => <div key={k}><CaseImg id={ph} className="spec-ph" lazy={false} /><dt>{k}</dt><dd>{v}</dd></div>)}
+          {[['지역', '전국', 'w37'], ['장비', '배관내시경 · 고압세척기', 'w12'], ['상담', '24시간 · 당일·야간 출동', 'w29']].map(([k, v, ph]) => <div key={k}><CaseImg id={ph} className="spec-ph" lazy={false} /><dt>{k}</dt><dd>{v}</dd></div>)}
         </dl>
       </PhotoTop>
 
