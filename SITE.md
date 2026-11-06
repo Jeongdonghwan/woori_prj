@@ -64,5 +64,5 @@ python -I scripts/drip/drip_status.py data/drip.json  # 오늘 열 묶음 (launc
 - [ ] 사업자등록번호, 대표 이름(블로그에 없음)
 - [ ] 청주·평택·세종·공주·예산 실제 출동 여부 (지금은 '통화 확인'으로 표기)
 - [ ] 바닥 속 누수탐지 장비 보유 여부 (있으면 누수탐지 페이지 문구 보강)
-- [ ] 서치어드바이저·서치콘솔 소유확인 코드 (`lib/site.ts` NAVER_VERIFY·GOOGLE_VERIFY)
+- [x] 서치어드바이저·서치콘솔 소유확인 코드 (`lib/site.ts` NAVER_VERIFY·GOOGLE_VERIFY)
 - [ ] GitHub 저장소(deploy 브랜치용 remote)
