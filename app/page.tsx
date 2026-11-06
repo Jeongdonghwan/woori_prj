@@ -8,7 +8,7 @@ import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
 import { Actions, CaseImg, IconArrow, JsonLd, PhotoTop, SectionHead } from '../components/Common';
 
 const HOME_TITLE = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘 고압세척`;
-const HOME_DESC = '천안·아산 하수구 막힘, 변기·싱크대 막힘, 공용배관 고압세척. RIDGID 배관내시경으로 원인을 보고 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다. 24시간 상담, 당일·야간 긴급출동.';
+const HOME_DESC = '천안·아산 하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. 내시경으로 원인을 보고 작업합니다. 24시간 상담, 당일·야간 출동.';
 export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESC,

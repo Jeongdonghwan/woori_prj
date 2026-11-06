@@ -59,7 +59,7 @@ python -I scripts/drip/drip_status.py data/drip.json  # 오늘 열 묶음 (launc
 - 파비콘: 남색 둥근 사각 + 흰 수도꼭지(배관 엘보+물방울) 기호 — app/icon.png·app/apple-icon.png·public/favicon.ico
 
 ## 받아야 할 정보 → `lib/site.ts`
-- [ ] 도메인 (`SITE_URL`, 지금은 `https://woori-demo.example`) + `data/drip.json` siteUrl·launch
+- [x] 도메인 우리배관설비.com (`xn--zb0b83vh1b30ce7elxk.com`), 오픈일 2026-11-06 (`lib/site.ts`, `data/drip.json`)
 - [ ] 사업장 주소 — 블로그 지도 첨부가 두 곳(천안 서북구 불당17길 14 / 쌍용13길 21 1층). 확인 전까지 '천안시 서북구'만 표기
 - [ ] 사업자등록번호, 대표 이름(블로그에 없음)
 - [ ] 청주·평택·세종·공주·예산 실제 출동 여부 (지금은 '통화 확인'으로 표기)

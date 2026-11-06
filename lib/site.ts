@@ -2,8 +2,8 @@
 // 근거: 우리설비 네이버 블로그(blog.naver.com/gook1008) '우리설비' 상호로 쓴 글 28편(2025-12-02 ~ 2026-03-19).
 //   상호 '우리설비', 전화 010-9234-7119 (글마다 표기), 글 지도 첨부 위치 2곳(천안 서북구 불당17길 14 / 쌍용13길 21 1층).
 
-// TODO(도메인 미정): SITE_URL 환경변수로 넘기거나 기본값 교체. 배포: bash scripts/deploy.sh <묶음> <URL>
-export const SITE_URL = process.env.SITE_URL || 'http://172.237.20.244:8107';
+// 우리배관설비.com (퓨니코드). 배포: bash scripts/deploy.sh <묶음> <URL>
+export const SITE_URL = process.env.SITE_URL || 'https://xn--zb0b83vh1b30ce7elxk.com';
 export const BRAND = '우리배관설비'; // 사용자 지정 사이트 이름 (블로그 상호는 '우리설비')
 export const SITE_NAME = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘`;
 

@@ -25,7 +25,7 @@ ROOT = HERE.parent
 SRC = ROOT / 'keywords' / '우리설비_충청7개지역_키워드5500.xlsx'
 SCORE = ROOT / 'source' / 'keywords_score.xlsx'
 OUT_XLSX = ROOT / 'keywords' / '우리설비_키워드5500_페이지.xlsx'
-SITE_URL = 'https://woori-demo.example'  # TODO: 도메인 확정 후 lib/site.ts 와 함께 바꿀 것
+SITE_URL = 'https://xn--zb0b83vh1b30ce7elxk.com'  # lib/site.ts 와 같게
 UNIT_TIER = {'시·군': 1, '시·군·구': 2, '생활권': 3, '동·읍면': 4}
 
 # 엑셀 '단어' → 본문 조합기의 서비스 묶음 (lib/compose.ts SVC 키)
