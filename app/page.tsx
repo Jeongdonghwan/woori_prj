@@ -60,10 +60,10 @@ export default function Home() {
         <div className="hero-text">
           <h1><span><i>막힌 원인부터 보고</i></span><span><i>뚫는 {BRAND}</i></span></h1>
           <p className="hero-lead">하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. RIDGID 배관내시경으로 관 속을 먼저 보여 드리고, 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다.</p>
-          <Actions blog />
+          <Actions blog><CaseImg id="m1" className="hero-ph" lazy={false} /></Actions>
         </div>
         <dl className="hero-specs">
-          {[['', '누수탐지 · 누수보험상담 · 피해복구', 'w37'], ['장비', '배관내시경 · 고압세척기', 'w12'], ['상담', '24시간 · 당일·야간 출동', 'w29']].map(([k, v, ph]) => <div key={v}><CaseImg id={ph} className="spec-ph" lazy={false} />{k && <dt>{k}</dt>}<dd>{v}</dd></div>)}
+          {[['주요서비스', '막힘해결 · 누수탐지', 'm3'], ['장비', '배관내시경 · 고압세척기 · 누수탐지기', 'm4'], ['상담', '24시간 · 당일·야간 출동', 'm5']].map(([k, v, ph]) => <div key={v}><CaseImg id={ph} className="spec-ph" lazy={false} />{k && <dt>{k}</dt>}<dd>{v}</dd></div>)}
         </dl>
       </PhotoTop>
 
@@ -88,7 +88,7 @@ export default function Home() {
         </section>
 
         <section className="sec mist">
-          <SectionHead title="하는 일" />
+          <SectionHead title="주요 서비스" />
           <ol className="works">
             {WORKS.map((w, i) => {
               const lk = w.svc ? svcLink(w.svc) : undefined;
@@ -108,7 +108,7 @@ export default function Home() {
       <section className="band">
         <div className="wrap">
           <SectionHead title="현장 장비" />
-          <ol className="tools reveal-group">{TOOLS.map((t, i) => <li key={t.name}><CaseImg id={t.ph} className="tools-ph" /><h3>{t.name}</h3><p>{t.d[i % 3]('천안·아산', '막힘')}</p></li>)}</ol>
+          <ol className="tools reveal-group"><li><CaseImg id="m2" className="tools-ph" /><h3>누수탐지기</h3><p>배관에서 새는 물소리를 듣고 누수 의심 지점을 좁혀갑니다</p></li>{TOOLS.map((t, i) => <li key={t.name}><CaseImg id={t.ph} className="tools-ph" /><h3>{t.name}</h3><p>{t.d[i % 3]('천안·아산', '막힘')}</p></li>)}</ol>
         </div>
       </section>
 
@@ -174,9 +174,9 @@ export default function Home() {
 
       <section className="closing">
         <div className="wrap" data-reveal>
-          <h2>주소와 막힌 곳만 알려 주세요</h2>
-          <p>{CONTACT.hours}. 막힌 배수구 사진을 문자로 먼저 보내 주시면 통화 때 바로 이어서 설명드립니다.</p>
-          <Actions />
+          <h2>막혔나요? 물이 새나요?</h2>
+          <p>지역과 증상을 알려주시면<br />방문 가능 시간을 안내해 드립니다.</p>
+          <Actions smsLabel="현장 사진 문자로 보내기" />
         </div>
       </section>
     </main>

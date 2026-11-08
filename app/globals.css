@@ -127,7 +127,6 @@ h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.3; }
 .hero-specs .spec-ph { grid-row: span 2; width: 72px; height: 72px; object-fit: cover; border-radius: 12px; }
 .hero-specs dt { align-self: end; font-size: .82rem; color: var(--muted); }
 .hero-specs dd { align-self: start; margin: 0; font-weight: 700; color: var(--navy); }
-.hero-specs .spec-ph + dd { grid-row: span 2; align-self: center; }
 @media (max-width: 900px) {
   .hero { padding: 56px 0 48px; }
   .ptop-bg, .ptop::after { width: 100%; }
@@ -398,3 +397,7 @@ p.center { margin: 32px 0 0; }
   .mask::after { display: none; }
 }
 .cta-band + .wrap > .sec:not(.mist):first-child { padding-top: 0; }
+
+/* 홈 히어로 사진: 모바일에서만 전화 버튼 아래 */
+.hero-ph { display: none; }
+@media (max-width: 760px) { .hero-ph { display: block; width: 100%; aspect-ratio: 304 / 140; object-fit: cover; border-radius: 14px; } }
