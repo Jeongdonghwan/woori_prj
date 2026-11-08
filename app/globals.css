@@ -400,4 +400,4 @@ p.center { margin: 32px 0 0; }
 
 /* 홈 히어로 사진: 모바일에서만 전화 버튼 아래 */
 .hero-ph { display: none; }
-@media (max-width: 760px) { .hero-ph { display: block; width: 100%; aspect-ratio: 304 / 140; object-fit: cover; border-radius: 14px; } }
+@media (max-width: 760px) { .hero-ph { display: block; width: 100%; aspect-ratio: 1216 / 560; object-fit: cover; border-radius: 14px; } }
