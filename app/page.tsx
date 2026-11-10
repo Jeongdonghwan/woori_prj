@@ -7,13 +7,13 @@ import { BRAND, CONTACT, BLOG, shareMeta } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
 import { Actions, CaseImg, IconArrow, JsonLd, PhotoTop, SectionHead } from '../components/Common';
 
-const HOME_TITLE = `${BRAND} | 천안·아산 하수구·변기·싱크대 막힘 고압세척`;
-const HOME_DESC = '천안·아산 하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. 내시경으로 원인을 보고 작업합니다. 24시간 상담, 당일·야간 출동.';
+const HOME_TITLE = `${BRAND} | 전국 하수구·변기·싱크대 막힘 고압세척`;
+const HOME_DESC = '전국 하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. 내시경으로 원인을 보고 작업합니다. 24시간 상담, 당일·야간 출동.';
 export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESC,
   alternates: { canonical: '/', types: { 'application/rss+xml': '/rss.xml' } },
-  ...shareMeta('home', `${BRAND} 천안·아산 배관 막힘`, { title: HOME_TITLE, description: HOME_DESC, url: '/' }),
+  ...shareMeta('home', `${BRAND} 전국 배관 막힘`, { title: HOME_TITLE, description: HOME_DESC, url: '/' }),
 };
 
 // 블로그 시공 글에 나온 작업 종류 그대로 (글 제목·본문 기준), ph = 그 작업 사진(data/cases.json)
@@ -75,9 +75,9 @@ export default function Home() {
               <p className="first">하수구가 막히면 대부분 뚫어뻥·스프링·약품으로 급하게 물길을 냅니다. 하지만 관벽에 붙은 기름때와 침전물, 모래·시멘트 가루는 그대로 남아 며칠 뒤 같은 자리가 다시 막힙니다.</p>
               <p>{BRAND}는 천안·아산의 아파트, 상가, 회사, 음식점, 주택 현장에서 RIDGID 배관내시경으로 관 속을 먼저 촬영합니다. 원인이 보이면 필요한 구간만 뚫고, 굳은 슬러지는 고압세척으로 관벽째 씻어 내고, 외부 맨홀과 메인 배관까지 흐름을 확인합니다.</p>
               <ol className="why-steps">
-                <li><b>원인 촬영</b>배관내시경으로 막힌 위치와 원인을 화면으로 보여 드립니다</li>
-                <li><b>필요한 구간만</b>막힌 구간을 뚫고, 굳은 찌꺼기는 고압세척으로 관벽째 씻어 냅니다</li>
-                <li><b>다시 촬영</b>작업 뒤 내시경을 다시 넣고 배수 테스트로 확인합니다</li>
+                <li><b>원인 촬영</b><span>배관내시경으로 막힌 위치와 원인을 화면으로 보여 드립니다</span><CaseImg id="m6" className="step-ph" /></li>
+                <li><b>필요한 구간만</b><span>막힌 구간을 뚫고, 굳은 찌꺼기는 고압세척으로 관벽째 씻어 냅니다</span><CaseImg id="m7" className="step-ph" /></li>
+                <li><b>다시 촬영</b><span>작업 뒤 내시경을 다시 넣고 배수 테스트로 확인합니다</span><CaseImg id="m8" className="step-ph" /></li>
               </ol>
             </div>
             <figure className="memo-photo mask" data-reveal>
