@@ -77,7 +77,7 @@ export const Footer = () => (
     <div className="wrap foot-grid">
       <div>
         <strong className="foot-brand">{BRAND}</strong>
-        <p>하수구 막힘 · 변기 막힘 · 싱크대 막힘 · 고압세척 · 누수탐지 · 배관내시경<br />천안·아산 전 지역 출동 · {CONTACT.hours} · 당일·야간 긴급출동</p>
+        <p>하수구 막힘 · 변기 막힘 · 싱크대 막힘 · 고압세척 · 누수탐지 · 배관내시경<br />전국 출동 · {CONTACT.hours} · 당일·야간 긴급출동</p>
         <p><Link href="/area/">지역 안내</Link> · <Link href="/cases/">시공 사례</Link> · <Link href="/blog/">블로그</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       <ul className="foot-info">
