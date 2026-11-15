@@ -29,6 +29,7 @@ export const BUSINESS = {
 export const OPEN_WAVE = Number(process.env.OPEN_WAVE || 1);
 
 // 붙여쓰기만 다른 키워드 페이지는 대표 페이지로 canonical + 사이트맵 제외 (지금 원본에는 0건)
+export const UPDATED = '2026-11-16'; // content revision date - bump when page text changes
 export const MERGE_VARIANTS = true;
 
 export const tel = `tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`;

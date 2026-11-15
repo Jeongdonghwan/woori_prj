@@ -1,6 +1,6 @@
 // 공통 UI — 이모지 없이 선 아이콘, 모서리 10px 버튼, 가운데 정렬 섹션 머리(번호 없음).
 import Link from 'next/link';
-import { BRAND, CONTACT, BUSINESS, BLOG, tel, smsHref } from '../lib/site';
+import { BRAND, CONTACT, BUSINESS, BLOG, UPDATED, tel, smsHref } from '../lib/site';
 import { CASES } from '../lib/data';
 import stockData from '../data/stock.json';
 
@@ -78,7 +78,7 @@ export const Footer = () => (
       <div>
         <strong className="foot-brand">{BRAND}</strong>
         <p>하수구 막힘 · 변기 막힘 · 싱크대 막힘 · 고압세척 · 누수탐지 · 배관내시경<br />전국 출동 · {CONTACT.hours} · 당일·야간 긴급출동</p>
-        <p><Link href="/area/">지역 안내</Link> · <Link href="/cases/">시공 사례</Link> · <Link href="/blog/">블로그</Link> · <a href="/rss.xml">RSS</a></p>
+        <p><Link href="/about/">소개</Link> · <Link href="/area/">지역 안내</Link> · <Link href="/cases/">시공 사례</Link> · <Link href="/blog/">블로그</Link> · <a href="/rss.xml">RSS</a></p>
       </div>
       <ul className="foot-info">
         <li><span>상호</span>{BRAND}</li>
@@ -87,7 +87,7 @@ export const Footer = () => (
         <li><span>블로그</span><a href={BLOG} target="_blank" rel="noopener noreferrer">blog.naver.com/gook1008</a></li>
       </ul>
     </div>
-    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 상담 때 받은 주소·연락처는 출동과 비용 안내에만 씁니다.</div>
+    <div className="wrap foot-bottom">© {new Date().getFullYear()} {BRAND} · 최종 수정 <time dateTime={UPDATED}>{UPDATED}</time> · 상담 때 받은 주소·연락처는 출동과 비용 안내에만 씁니다.</div>
   </footer>
 );
 

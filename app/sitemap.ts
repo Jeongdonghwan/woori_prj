@@ -16,8 +16,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${SITE_URL}/`, lastModified: HOME_MOD, changeFrequency: 'weekly', priority: 1 },
     { url: `${SITE_URL}/area/`, lastModified: PAGE_MOD, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${SITE_URL}/cases/`, lastModified: mtime('data/cases.json'), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${SITE_URL}/blog/`, lastModified: posts[0] ? new Date(posts[0].publishedAt) : HOME_MOD, changeFrequency: 'daily', priority: 0.7 },
+    { url: `${SITE_URL}/about/`, lastModified: mtime('app/about/page.tsx', 'lib/site.ts'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/cases/`, lastModified: mtime('data/cases.json'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/blog/`, lastModified: posts[0] ? new Date(posts[0].publishedAt) : HOME_MOD, changeFrequency: 'daily', priority: 0.8 },
     ...posts.map((p) => ({ url: `${SITE_URL}${postEncodedPath(p)}`, lastModified: new Date(p.publishedAt), changeFrequency: 'monthly' as const, priority: 0.6 })),
     ...openCities().map((c) => ({ url: `${SITE_URL}${cityEncodedPath(c)}`, lastModified: PAGE_MOD, changeFrequency: 'weekly' as const, priority: 0.8 })),
     ...OPEN_PAGES.filter(inSitemap).map((p) => ({
