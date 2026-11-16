@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BRAND, CONTACT, BUSINESS, BLOG } from './site';
+import { SITE_URL, SITE_NAME, BRAND, CONTACT, BUSINESS, BLOG, UPDATED } from './site';
 
 // 업체 — 거리 주소는 사용자 확인 전이라 넣지 않는다(lib/site.ts TODO). 지역·전화·블로그만.
 export const businessJsonLd = () => ({
@@ -48,6 +48,7 @@ export const serviceJsonLd = (o: { name: string; type: string; description: stri
   serviceType: o.type,
   description: o.description,
   url: `${SITE_URL}${o.path}`,
+  dateModified: UPDATED,
   areaServed: { '@type': 'Place', name: o.area },
   provider: { '@id': `${SITE_URL}/#business` },
 });
