@@ -404,3 +404,33 @@ p.center { margin: 32px 0 0; }
 .why-steps li { grid-template-columns: 44px 1fr 104px; grid-template-rows: auto 1fr; align-items: start; }
 .why-steps b, .why-steps li span { grid-column: 2; }
 .why-steps .step-ph { grid-column: 3; grid-row: 1 / span 2; width: 104px; aspect-ratio: 1; object-fit: cover; border-radius: 12px; margin-left: 12px; }
+
+/* 2026-11-19 업체 요청 화면 — 히어로 버튼 두 개, 두 번째 절 첫 사진, 중간 상담 카드 */
+.hero-cta { display: grid; grid-template-columns: 1.35fr 1fr; gap: 12px; margin-top: 32px; max-width: 520px; animation: fade .9s .45s var(--ease) both; }
+.hero-cta a { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; text-decoration: none; transition: transform .25s var(--ease), filter .25s; }
+.hero-cta a:hover { filter: brightness(1.06); } .hero-cta a:active { transform: scale(.98); }
+.hc-ico { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; }
+.hc-call { background: linear-gradient(120deg, #6fdcff, var(--sky) 60%, #1fa7e6); color: var(--deep); box-shadow: 0 10px 26px -10px rgba(60,188,240,.7); }
+.hc-call .hc-ico { background: rgba(255,255,255,.4); }
+.hc-call small { display: block; font-size: .8rem; font-weight: 700; }
+.hc-call b { display: block; font-size: 1.14rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; white-space: nowrap; }
+.hc-sms { border: 1.5px solid var(--sky); background: rgba(60,188,240,.08); color: #fff; justify-content: center; }
+.hc-sms .hc-ico { background: rgba(60,188,240,.18); color: var(--sky); }
+.hc-sms b { font-size: 1.08rem; font-weight: 800; white-space: nowrap; }
+.hero-blog { margin: 18px 0 0; } .hero-blog .btn-text { color: rgba(255,255,255,.85); }
+@media (max-width: 760px) { .hero-ph { margin-top: 20px; } }
+@media (max-width: 400px) { .hero-cta { gap: 8px; } .hero-cta a { padding: 12px 10px; gap: 8px; } .hc-ico { width: 36px; height: 36px; } .hc-call b { font-size: 1.02rem; } }
+
+.why-ph { margin: 0 0 26px; }
+.why-ph img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 25%; border-radius: 14px; }
+.why-ph figcaption { margin-top: 8px; font-size: .84rem; color: var(--muted); text-align: center; }
+@media (min-width: 901px) { .why-ph { display: none; } }
+
+.cta-card { max-width: 760px; margin: 0 auto; padding: 30px 28px; border: 1px solid #bfe3f5; border-radius: 20px; background: var(--sky-soft); box-shadow: 0 22px 44px -26px rgba(0,31,128,.35); }
+.cta-card h2 { display: flex; align-items: center; gap: 14px; margin: 0; font-size: clamp(1.5rem, 3.4vw, 1.9rem); font-weight: 800; color: var(--deep); letter-spacing: -0.04em; }
+.cc-ico { flex: none; width: 52px; height: 52px; border-radius: 12px; background: #d3eefb; color: var(--blue); display: grid; place-items: center; }
+.cta-card > p { margin: 14px 0 0; color: #2b3550; }
+.cc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.cc-tags li { padding: 7px 16px; border: 1px solid #9fd6f0; border-radius: 8px; background: #fff; color: var(--blue); font-weight: 700; font-size: .92rem; }
+.cc-call { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; padding: 17px; border-radius: 12px; background: var(--navy); color: #fff; font-weight: 800; font-size: 1.18rem; text-decoration: none; font-variant-numeric: tabular-nums; transition: background .2s; }
+.cc-call:hover { background: var(--blue); }

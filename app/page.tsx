@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { CASES, CITIES, OPEN_PAGES, openCities, cityPages, cityPath, pagePath, pageEncodedPath, inSitemap } from '../lib/data';
 import { TOOLS } from '../lib/compose';
 import { getPosts, postPath } from '../lib/blog';
-import { BRAND, CONTACT, BLOG, shareMeta } from '../lib/site';
+import { BRAND, CONTACT, BLOG, shareMeta, tel } from '../lib/site';
 import { faqJsonLd, itemListJsonLd } from '../lib/jsonld';
-import { Actions, CaseImg, IconArrow, JsonLd, PhotoTop, SectionHead } from '../components/Common';
+import { Actions, CaseImg, HeroCta, IconArrow, IconDoc, IconFaucet, IconPhone, JsonLd, PhotoTop, SectionHead } from '../components/Common';
+
 
 const HOME_TITLE = `${BRAND} | 전국 하수구·변기·싱크대 막힘 고압세척`;
 const HOME_DESC = '전국 하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. 내시경으로 원인을 보고 작업합니다. 24시간 상담, 당일·야간 출동.';
@@ -60,7 +61,9 @@ export default function Home() {
         <div className="hero-text">
           <h1><span><i>막힌 원인부터 보고</i></span><span><i>뚫는 {BRAND}</i></span></h1>
           <p className="hero-lead">하수구·변기·싱크대 막힘, 공용배관 고압세척, 누수탐지. RIDGID 배관내시경으로 관 속을 먼저 보여 드리고, 필요한 만큼만 작업한 뒤 다시 촬영해 확인합니다.</p>
-          <Actions blog><CaseImg id="m1" className="hero-ph" lazy={false} /></Actions>
+          <HeroCta />
+          <CaseImg id="m1" className="hero-ph" lazy={false} />
+          <p className="hero-blog"><a className="btn-text" href={BLOG} target="_blank" rel="noopener noreferrer"><IconDoc /><span>블로그 시공 글 보기</span></a></p>
         </div>
         <dl className="hero-specs">
           {[['주요서비스', '막힘해결 · 누수탐지', 'm3'], ['장비', '배관내시경 · 고압세척기 · 누수탐지기', 'm4'], ['상담', '24시간 · 당일·야간 출동', 'm5']].map(([k, v, ph]) => <div key={v}><CaseImg id={ph} className="spec-ph" lazy={false} />{k && <dt>{k}</dt>}<dd>{v}</dd></div>)}
@@ -72,6 +75,10 @@ export default function Home() {
           <SectionHead title="뚫어도 다시 막히는 이유를 화면으로 보여 드립니다" />
           <div className="cols">
             <div className="prose" data-reveal>
+              <figure className="why-ph">
+                <img src="/img/w23.webp" alt={`${BRAND} 천안 쌍용동 하수구 내시경 화면 - 관을 막은 노란 기름 슬러지`} width={CASES[22].w} height={CASES[22].h} loading="lazy" />
+                <figcaption>천안 쌍용동 · 내시경 화면 속 기름 슬러지</figcaption>
+              </figure>
               <p className="first">하수구가 막히면 대부분 뚫어뻥·스프링·약품으로 급하게 물길을 냅니다. 하지만 관벽에 붙은 기름때와 침전물, 모래·시멘트 가루는 그대로 남아 며칠 뒤 같은 자리가 다시 막힙니다.</p>
               <p>{BRAND}는 천안·아산의 아파트, 상가, 회사, 음식점, 주택 현장에서 RIDGID 배관내시경으로 관 속을 먼저 촬영합니다. 원인이 보이면 필요한 구간만 뚫고, 굳은 슬러지는 고압세척으로 관벽째 씻어 내고, 외부 맨홀과 메인 배관까지 흐름을 확인합니다.</p>
               <ol className="why-steps">
@@ -128,9 +135,11 @@ export default function Home() {
       </div>
 
       <section className="cta-band" data-reveal>
-        <div className="wrap"><div className="cta-band-in">
-          <p>물이 천천히 내려가고, 냄새가 올라오고, 뚫어도 또 막힌다면<br />관 속부터 확인할 때입니다</p>
-          <Actions sms={false} />
+        <div className="wrap"><div className="cta-card">
+          <h2><span className="cc-ico"><IconFaucet /></span>뚫어도 또 막히나요?</h2>
+          <p>물이 천천히 내려가거나 냄새가 올라오면 배관 속부터 확인해 보세요.</p>
+          <ul className="cc-tags"><li>배수 지연</li><li>악취</li><li>반복 막힘</li></ul>
+          <a className="cc-call" href={tel}><IconPhone /><span>{CONTACT.phone}</span></a>
         </div></div>
       </section>
 
