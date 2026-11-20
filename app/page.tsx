@@ -38,11 +38,11 @@ const FAQ = [
 ];
 
 const PRINCIPLES = [
-  { t: '사장 직접 출동', d: '상담한 사람이 현장에 와서 상태 설명부터 마무리까지 책임지고 진행합니다.' },
-  { t: '내시경 촬영 후 진단', d: '무작정 뚫지 않고 관 속을 먼저 촬영해 막힌 위치와 원인을 보여 드립니다.' },
-  { t: '필요한 작업만', d: '타일 철거·배관 교체 같은 불필요한 공사와 과잉 견적 없이 원인 구간만 처리합니다.' },
-  { t: '외부 라인까지', d: '실내만 뚫고 끝내지 않고 외부 맨홀·메인 배관까지 흐름을 확인합니다.' },
-  { t: '다시 촬영해 확인', d: '작업 뒤 내시경을 다시 넣고 배수 테스트로 역류·악취가 멈췄는지 확인합니다.' },
+  { t: '사장 직접 출동', ph: 'w29', d: '상담한 사람이 현장에 와서 상태 설명부터 마무리까지 책임지고 진행합니다.' },
+  { t: '내시경 촬영 후 진단', ph: 'w21', d: '무작정 뚫지 않고 관 속을 먼저 촬영해 막힌 위치와 원인을 보여 드립니다.' },
+  { t: '필요한 작업만', ph: 'w25', d: '타일 철거·배관 교체 같은 불필요한 공사와 과잉 견적 없이 원인 구간만 처리합니다.' },
+  { t: '외부 라인까지', ph: 'w05', d: '실내만 뚫고 끝내지 않고 외부 맨홀·메인 배관까지 흐름을 확인합니다.' },
+  { t: '다시 촬영해 확인', ph: 'w14', d: '작업 뒤 내시경을 다시 넣고 배수 테스트로 역류·악취가 멈췄는지 확인합니다.' },
 ];
 
 export default function Home() {
@@ -146,8 +146,8 @@ export default function Home() {
       <div className="wrap content">
         <section className="sec mist">
           <SectionHead title="작업 원칙" />
-          <ol className="timeline reveal-group">
-            {PRINCIPLES.map((x) => <li key={x.t}><strong>{x.t}</strong><p>{x.d}</p></li>)}
+          <ol className="principles reveal-group">
+            {PRINCIPLES.map((x, i) => <li key={x.t}><div className="pr-ph"><CaseImg id={x.ph} /><b>{i + 1}</b></div><div><strong>{x.t}</strong><p>{x.d}</p></div></li>)}
           </ol>
         </section>
 
@@ -185,7 +185,7 @@ export default function Home() {
         <div className="wrap" data-reveal>
           <h2>막혔나요? 물이 새나요?</h2>
           <p>지역과 증상을 알려주시면<br />방문 가능 시간을 안내해 드립니다.</p>
-          <Actions smsLabel="현장 사진 문자로 보내기" />
+          <Actions />
         </div>
       </section>
     </main>

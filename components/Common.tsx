@@ -17,20 +17,19 @@ export const IconArrow = () => <Svg d="M5 12h14M13 6l6 6-6 6" size={16} />;
 export const IconImage = () => <Svg d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8.5 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4M21 15l-5-5L5 21" />;
 export const IconFaucet = () => <Svg d="M3 8h10a4 4 0 0 1 4 4v1M3 5v6M9 8V4M6 4h6M17 16.5c0 1-.6 1.8-1.4 1.8s-1.4-.8-1.4-1.8c0-.9 1.4-2.6 1.4-2.6s1.4 1.7 1.4 2.6z" size={26} />;
 // 홈 히어로 버튼 두 개 (전화 상담 · 사진 문자) — 2026-11-19 업체 요청 화면
-export const HeroCta = () => (
+export const HeroCta = ({ smsLabel = '사진 문자' }: { smsLabel?: string }) => (
   <div className="hero-cta">
     <a className="hc-call" href={tel}><span className="hc-ico"><IconPhone /></span><span><small>전화 상담</small><b>{CONTACT.phone}</b></span></a>
-    <a className="hc-sms" href={smsHref}><span className="hc-ico"><IconImage /></span><b>사진 문자</b></a>
+    <a className="hc-sms" href={smsHref}><span className="hc-ico"><IconImage /></span><b>{smsLabel}</b></a>
   </div>
 );
 export const IconDoc = () => <Svg d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5" size={17} />;
 
 // 본문 버튼 묶음 — 주 행동(전화) 슬랩 1개 + 보조 텍스트 링크
-export const Actions = ({ sms = true, blog = false, smsLabel = '막힌 곳 사진 문자로 보내기', children }: { sms?: boolean; blog?: boolean; smsLabel?: string; children?: React.ReactNode }) => (
+export const Actions = ({ sms = true, blog = false, smsLabel = '사진 문자', children }: { sms?: boolean; blog?: boolean; smsLabel?: string; children?: React.ReactNode }) => (
   <div className="actions">
-    <a className="btn-primary" href={tel}><IconPhone /><span>{CONTACT.phone}</span></a>
+    {sms ? <HeroCta smsLabel={smsLabel} /> : <a className="btn-primary" href={tel}><IconPhone /><span>{CONTACT.phone}</span></a>}
     {children}
-    {sms && <a className="btn-text" href={smsHref}><IconMsg /><span>{smsLabel}</span><IconArrow /></a>}
     {blog && <a className="btn-text" href={BLOG} target="_blank" rel="noopener noreferrer"><IconDoc /><span>블로그 시공 글 보기</span></a>}
   </div>
 );
