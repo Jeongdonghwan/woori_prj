@@ -448,3 +448,12 @@ p.center { margin: 32px 0 0; }
 .principles strong { display: block; color: var(--navy); font-size: 1.06rem; font-weight: 800; }
 .principles p { margin: 6px 0 0; font-size: .93rem; line-height: 1.6; color: #2b3550; }
 @media (max-width: 400px) { .principles li { grid-template-columns: 96px 1fr; gap: 12px; } .pr-ph img { width: 96px; height: 88px; } }
+/* 하단 고정 바 = 맨 위 두 버튼과 같은 모양 (2026-11-20 업체 요청) */
+.sticky-bar { display: block; background: var(--deep); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 24px rgba(10,22,64,.25); }
+.sticky-bar .hero-cta { margin: 0; max-width: none; animation: none; gap: 10px; }
+.sticky-bar .hero-cta a { padding: 10px 12px; gap: 10px; font-size: 1rem; }
+.sticky-bar .hc-sms { color: #fff; justify-content: center; }
+.sticky-bar .hc-ico { width: 36px; height: 36px; }
+.sticky-bar .hc-call b { font-size: 1.05rem; }
+@media (min-width: 900px) { .sticky-bar { width: 380px; padding: 12px; border-radius: 16px; } }
+@media (max-width: 899px) { body { padding-bottom: 82px; } }

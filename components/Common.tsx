@@ -101,9 +101,7 @@ export const Footer = () => (
   </footer>
 );
 
+// 하단 고정 바 — 맨 위와 같은 두 버튼(전화 상담 · 사진 문자) (2026-11-20 업체 요청)
 export const StickyBar = () => (
-  <div className="sticky-bar">
-    <a href={tel} className="sb-call"><IconPhone />{CONTACT.phone}</a>
-    <a href={smsHref} className="sb-sms"><IconMsg />사진 문자</a>
-  </div>
+  <div className="sticky-bar"><HeroCta /></div>
 );
