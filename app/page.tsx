@@ -38,11 +38,11 @@ const FAQ = [
 ];
 
 const PRINCIPLES = [
-  { t: '사장 직접 출동', ph: 'w29', d: '상담한 사람이 현장에 와서 상태 설명부터 마무리까지 책임지고 진행합니다.' },
-  { t: '내시경 촬영 후 진단', ph: 'w21', d: '무작정 뚫지 않고 관 속을 먼저 촬영해 막힌 위치와 원인을 보여 드립니다.' },
-  { t: '필요한 작업만', ph: 'w25', d: '타일 철거·배관 교체 같은 불필요한 공사와 과잉 견적 없이 원인 구간만 처리합니다.' },
-  { t: '외부 라인까지', ph: 'w05', d: '실내만 뚫고 끝내지 않고 외부 맨홀·메인 배관까지 흐름을 확인합니다.' },
-  { t: '다시 촬영해 확인', ph: 'w14', d: '작업 뒤 내시경을 다시 넣고 배수 테스트로 역류·악취가 멈췄는지 확인합니다.' },
+  { t: '대표 직접 방문', ph: 'w29', d: '상담부터 현장 점검과 마무리까지 담당합니다.' },
+  { t: '내시경으로 원인 진단', ph: 'w21', d: '배관 내부를 촬영해 막힌 위치와 원인을 확인합니다.' },
+  { t: '원인 구간 집중 작업', ph: 'w25', d: '진단 결과에 따라 필요한 구간만 작업합니다.' },
+  { t: '외부 맨홀·메인 배관 점검', ph: 'w05', d: '실내 배수구부터 외부 배관까지 흐름을 확인합니다.' },
+  { t: '작업 후 내시경·배수 확인', ph: 'w14', d: '내시경으로 다시 확인하고 배수 테스트를 진행합니다.' },
 ];
 
 export default function Home() {
@@ -145,9 +145,9 @@ export default function Home() {
 
       <div className="wrap content">
         <section className="sec mist">
-          <SectionHead title="작업 원칙" />
+          <SectionHead title="배관 점검 및 작업 절차" />
           <ol className="principles reveal-group">
-            {PRINCIPLES.map((x, i) => <li key={x.t}><div className="pr-ph"><CaseImg id={x.ph} /><b>{i + 1}</b></div><div><strong>{x.t}</strong><p>{x.d}</p></div></li>)}
+            {PRINCIPLES.map((x, i) => <li key={x.t}><b className="pr-no">{String(i + 1).padStart(2, '0')}</b><div className="pr-tx"><strong>{x.t}</strong><p>{x.d}</p></div><div className="pr-ph"><CaseImg id={x.ph} /></div></li>)}
           </ol>
         </section>
 

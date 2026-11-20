@@ -465,3 +465,13 @@ p.center { margin: 32px 0 0; }
 @media (max-width: 420px) { .hero-cta a, .sticky-bar .hero-cta a { padding: 10px 8px; gap: 7px; } .hc-ico, .sticky-bar .hc-ico { width: 32px; height: 32px; } .sticky-bar .hc-call b { font-size: clamp(.84rem, 4.1vw, 1.05rem); } }
 .nav .nav-call, .logo-text b { white-space: nowrap; }
 @media (max-width: 420px) { .nav .nav-call { padding: 9px 12px; font-size: clamp(.8rem, 3.9vw, .95rem); } .logo-text b { font-size: clamp(.95rem, 4.6vw, 1.22rem); } }
+
+/* 작업 절차: 번호 원 · 제목(왼쪽 선)+설명 · 오른쪽 사진 */
+.principles { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+.principles li { grid-template-columns: auto minmax(0, 1fr) clamp(120px, 38%, 260px); gap: 14px; padding: 14px 14px 14px 18px; border-radius: 14px; box-shadow: 0 2px 10px rgba(16, 32, 80, .06); }
+.pr-no { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: .95rem; font-weight: 800; }
+.pr-tx { word-break: keep-all; }
+.pr-tx strong { padding-left: 10px; border-left: 3px solid var(--navy); font-size: clamp(.98rem, 4.2vw, 1.15rem); line-height: 1.3; }
+.pr-tx p { padding-left: 13px; font-size: clamp(.84rem, 3.6vw, .95rem); }
+.pr-ph img { width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 10px; }
+@media (max-width: 400px) { .principles li { grid-template-columns: auto minmax(0, 1fr) 38%; gap: 10px; padding: 12px; } .pr-no { width: 34px; height: 34px; font-size: .85rem; } .pr-ph img { width: 100%; height: auto; } }
