@@ -90,7 +90,9 @@ export const Footer = () => (
       </div>
       <ul className="foot-info">
         <li><span>상호</span>{BRAND}</li>
-        {BUSINESS.bizNumber && <li><span>사업자</span>{BUSINESS.bizNumber}</li>}
+        <li><span>대표</span>{BUSINESS.ceo}</li>
+        <li><span>사업자</span>{BUSINESS.bizNumber}</li>
+        <li><span>주소</span>{BUSINESS.region} {BUSINESS.streetAddress}</li>
         <li><span>전화</span><a href={tel}>{CONTACT.phone}</a></li>
         <li><span>블로그</span><a href={BLOG} target="_blank" rel="noopener noreferrer">blog.naver.com/gook1008</a></li>
       </ul>
