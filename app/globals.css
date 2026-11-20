@@ -457,3 +457,11 @@ p.center { margin: 32px 0 0; }
 .sticky-bar .hc-call b { font-size: 1.05rem; }
 @media (min-width: 900px) { .sticky-bar { width: 380px; padding: 12px; border-radius: 16px; } }
 @media (max-width: 899px) { body { padding-bottom: 82px; } }
+/* 좁은 폰·큰 글씨 설정에서 두 버튼이 화면 밖으로 밀리던 것(2026-11-20): 칸이 내용보다 좁아질 수 있게, 번호 글씨는 화면 폭 따라 */
+.hero-cta { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+.hero-cta a { min-width: 0; }
+.hc-call b { font-size: clamp(.86rem, 4.3vw, 1.14rem); }
+.hc-sms b { font-size: clamp(.9rem, 4.2vw, 1.08rem); }
+@media (max-width: 420px) { .hero-cta a, .sticky-bar .hero-cta a { padding: 10px 8px; gap: 7px; } .hc-ico, .sticky-bar .hc-ico { width: 32px; height: 32px; } .sticky-bar .hc-call b { font-size: clamp(.84rem, 4.1vw, 1.05rem); } }
+.nav .nav-call, .logo-text b { white-space: nowrap; }
+@media (max-width: 420px) { .nav .nav-call { padding: 9px 12px; font-size: clamp(.8rem, 3.9vw, .95rem); } .logo-text b { font-size: clamp(.95rem, 4.6vw, 1.22rem); } }
