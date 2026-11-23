@@ -3,7 +3,7 @@
 //   장비(RIDGID 배관내시경 micro CA-350·SeeSnake, 고압세척기·연장 호스 릴, RIDGID 플렉스샤프트, 석션 장비, 관통 장비),
 //   작업 원칙(사장 직접 출동, 내시경 촬영 후 진단, 불필요한 공사·추가요금 없음, 작업 전후 사진 확인, 원인→제거→재확인),
 //   24시간 상담, 당일출동·야간 긴급출동, 천안·아산 전 지역 출동. 가격·건수·경력 연수·만족도 숫자는 블로그에 없으므로 쓰지 않는다.
-import { Page, Place, City, Case, PLACES, CITIES, ALL_PAGES, seedOf, rotate, casesFor } from './data';
+import { Page, Place, City, Case, PLACES, CITIES, ALL_PAGES, seedOf, rotate, casesFor, related } from './data';
 import { BRAND, CONTACT } from './site';
 import { j } from './ko';
 
@@ -392,13 +392,7 @@ export function compose(p: Page): Composed {
     `${p.kw} - 내시경으로 원인부터 보는 ${BRAND}`,
     `${p.kw} | 원인 확인·재확인 ${BRAND}`,
   ], s, 'title');
-  const descHead: Record<ModG, string> = {
-    price: `${P.admin} ${wl} ${j(p.mod, '이')} 정해지는 기준 — 막힌 위치·원인·장비·외부 라인. 작업 전 사전 안내, 불필요한 추가요금 없음.`,
-    pick: `${lb} ${wl} ${p.mod} 고르는 기준 6가지 — 내시경 진단, 장비, 재확인, 추가요금, 직접 출동, 출동 시간.`,
-    time: `${lb} ${wl} ${p.mod} 안내. 24시간 상담, 통화로 도착 시간 확인. ${C.served ? '천안·아산 당일·야간 긴급출동.' : '출동 가능 여부는 통화로 확인.'}`,
-    base: `${P.admin} ${wl}. 배관내시경으로 원인을 보고 필요한 만큼만 뚫고 씻은 뒤 재확인합니다.`,
-  };
-  const description = `${descHead[g]} ${BRAND} ${CONTACT.phone}`;
+  const description = desc80(p, wl, P, C); // 2026-11-24: 45~80자
 
   const eyebrow = P.kind === '시군' ? C.full : P.admin;
   const lead = pick(g === 'price' ? [
@@ -537,4 +531,152 @@ export function compose(p: Page): Composed {
     honest: svc.honest && (p.service !== '내시경' || p.word === '배관관로탐지') ? svc.honest(nm) : undefined,
     symptoms, tools, cases, steps, stepsHeading: `${lb} 진행 순서`, info, faq, closing, cta,
   };
+}
+
+// ---- 레이 모범 구조 (2026-11-24) — 분류 줄 → h1(키워드+수식어) → 설명 → 핵심 요약 → 번호 절 6개(한 문단) → FAQ → 관련 링크 ----
+// 절 본문은 문장 후보를 슬러그 해시 순서로 이어 붙여 한 문단(공백 제외 230~250자 목표)으로 만든다. 사실은 위 compose 재료만 쓴다.
+const shuffle = <T,>(arr: T[], s: string, salt: string) => arr.map((x, i) => [seedOf(`${s}::${salt}::${i}`), x] as [number, T]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
+const nsp = (t: string) => t.replace(/\s/g, '').length;
+function para(first: string[], rest: string[], s: string, salt: string, keep = false): string {
+  const out = [pick(first, s, `${salt}f`)];
+  let n = nsp(out[0]);
+  for (const x of keep ? rest : shuffle(rest, s, salt)) {
+    if (n >= 225) break;
+    if (n + nsp(x) > 275) continue;
+    out.push(x); n += nsp(x);
+  }
+  return out.join(' ');
+}
+const KW_AT = new Set([0, 1, 2, 5]); // 절 6개 중 4개 h2 에 키워드 전체
+
+export function ray(p: Page) {
+  const c = compose(p);
+  const P = PLACES[p.place];
+  const C = CITIES[p.city];
+  const svc = SVC[p.service];
+  const s = p.slug;
+  const nm = P.name;
+  const wl = c.wl;
+  const m = p.mod;
+  const g = modGroup(m);
+  const cx = ctxOf(P);
+  const cn = CTX_NOUN[cx];
+  const causes = rotate(svc.causes, s, 'rc');
+  const syms = shuffle(svc.symptoms, s, 'rs');
+  const toolNames = svc.tools.slice(0, 3).map((i) => TOOLS[i].name);
+  // 키워드에 이미 있는 지역명이 든 장소는 수식어에 쓰지 않는다
+  const words = [p.label, nm, p.city, ...nm.split(' ')].filter((x) => x.length >= 2);
+  const spot = rotate(P.spots, s, 'h1spot').find((x) => !words.some((w) => x.includes(w)));
+  const home = P.homes.split(',')[0].trim();
+  const head = (i: number, sub: string) => (KW_AT.has(i) ? `${p.kw}${i % 2 ? ' — ' : ': '}${sub}` : sub);
+
+  const h1sub = pick(({
+    price: [`막힌 위치·원인으로 정하는 금액`, `작업 전에 먼저 듣는 금액 기준`, `${cn} 배관 금액이 달라지는 이유`, ...(spot ? [`${spot} 주변 현장 금액 안내`] : [])],
+    pick: [`내시경 진단과 재확인으로 고르기`, `${causes[0]}·${causes[1]} 원인부터 보는 곳`, `${cn} 배관 업체 고르는 기준`, ...(spot ? [`${spot} 주변 업체 비교 기준`] : [])],
+    time: C.served
+      ? [`24시간 상담과 당일·야간 출동`, `통화로 도착 시간부터 맞추기`, `${cn} 역류 급할 때 연락 순서`, ...(spot ? [`${spot} 주변 도착 시간 안내`] : [])]
+      : [`출동 가능 여부부터 통화로 확인`, `24시간 상담과 도착 시간 확인`, `${cn} 역류 급할 때 연락 순서`],
+    base: [`${causes[0]}·${causes[1]} 원인부터 확인`, `내시경으로 보고 뚫은 뒤 재확인`, `${home} 배관 사정에 맞춰`, ...(spot ? [`${spot} 주변 현장 작업 순서`] : [])],
+  } as Record<ModG, string[]>)[g], s, 'h1sub');
+
+  const served = C.served
+    ? `${nm} 현장은 ${p.city} 전 지역 출동 범위에 들고 당일·야간 긴급출동도 됩니다.`
+    : `${j(nm, '은')} 천안·아산보다 멀어 출동 가능 여부를 통화로 먼저 확인합니다.`;
+  const ans = g === 'base' ? `${j(p.kw, '은')} ${nm} 현장에 사장이 직접 가서 내시경으로 원인을 확인한 뒤 필요한 만큼만 뚫고 씻는 방식으로 진행합니다.` : c.answer;
+  const summary = [ans, served, pick([
+    `작업 전·후 사진과 내시경 화면을 보여 드리고, 금액은 ${nm} 현장을 본 뒤 작업 전에 말씀드립니다.`,
+    `원인 확인 → 제거 → 재확인 순서를 지키고, ${nm} 현장도 불필요한 공사나 추가요금은 없습니다.`,
+  ], s, 'sum')].join(' ');
+
+  const S1 = {
+    sub: pick([`원인과 작업 범위`, `무엇이 막히고 어디까지 보나`, `막히는 원인부터`], s, 's1'),
+    p: para([`${nm}에서 말하는 ${j(wl, '은')} ${svc.aim}입니다.`, `${nm} 현장의 ${j(wl, '은')} ${svc.aim}입니다.`],
+      [...(c.honest ? [c.honest] : []),
+        `${nm} ${wl} 현장에서 자주 나오는 원인은 ${causes.slice(0, 3).join('·')}입니다.`,
+        `${nm} 현장에서는 ${svc.work}.`,
+        `${BRAND}는 ${toolNames.join('·')} 가운데 ${nm} 현장에 맞는 장비를 고릅니다.`,
+        `${causes[0]}처럼 관벽에 붙은 원인을 그대로 두고 물길만 내면 ${nm} 배관은 며칠 뒤 같은 자리가 다시 막힙니다.`,
+      ], s, 's1p'),
+  };
+  const S2 = {
+    sub: pick([`${nm} 건물과 배관 사정`, `동네 건물마다 다른 막힘 자리`, `${cn} 구조에서 먼저 볼 곳`], s, 's2'),
+    p: para([c.region.paras[0]],
+      [CTX_LINE[cx](nm), c.region.paras[1], `${nm} ${cn}에서 먼저 보는 곳은 ${CTX_SPOT[cx]}입니다.`,
+        ...(P.kind === '시군' ? [`${j(C.full, '은')} ${C.traits}입니다.`] : [])].filter((x) => x && !c.region.paras[0].includes(x)), s, 's2p'),
+  };
+  const S3 = {
+    sub: pick([`이런 증상이면 연락하세요`, `먼저 보이는 신호`, `${cn}에서 의심할 때`], s, 's3'),
+    p: para([`${nm} ${cn}에서 가장 흔한 신호는 '${syms[0]}'입니다.`, `${nm}에서 ${j(wl, '을')} 의심하는 첫 신호는 대개 '${syms[0]}'입니다.`],
+      [`${nm}에서는 '${syms[1]}', '${syms[2]}' 같은 증상도 같은 원인에서 나옵니다.`,
+        `'${syms[3]}' 같은 경우도 ${nm} 배관 속 어딘가에 원인이 남아 있다는 뜻입니다.`,
+        `이럴 때 약품을 붓거나 억지로 밀어 넣으면 더 깊이 막히니, ${nm} ${wl} 현장도 그 배수구는 쓰지 말고 연락을 주세요.`,
+        `막힌 배수구 사진을 ${CONTACT.phone}로 보내 주시면 ${nm} 현장에 가져갈 장비를 미리 챙깁니다.`,
+        `완전히 막히기 전에 보면 ${nm} 현장 작업도 짧게 끝나는 경우가 많습니다.`], s, 's3p', true),
+  };
+  const TOOL_P: string[] = [
+    `RIDGID 배관내시경은 손잡이형(micro CA-350)과 모니터형(SeeSnake)을 ${nm} 건물 크기에 맞춰 골라, 막힌 위치와 원인을 화면으로 먼저 봅니다.`,
+    `굳은 기름 슬러지·석회질은 차량에 실은 고압세척기와 연장 호스 릴로 ${nm} 건물 배수구부터 외부 맨홀까지 이어서 씻습니다.`,
+    `주방 배관 관벽의 기름 스케일은 RIDGID 플렉스샤프트 회전 헤드로 긁어내 ${nm} 배관을 손상 없이 넓힙니다.`,
+    `작업 중 나온 오수와 슬러지는 석션 장비로 빨아내 ${nm} 현장 바닥을 정리합니다.`,
+    `막힌 지점은 관통 장비로 먼저 물길을 내고, ${nm} 배관이 꺾이는 구간에는 맞는 헤드로 바꿔 끼웁니다.`,
+  ];
+  const S4 = {
+    sub: pick([`현장에 가져가는 장비`, `${wl}에 쓰는 장비`, `장비와 쓰는 순서`], s, 's4'),
+    p: para([`${nm} ${wl} 현장에는 ${j(TOOLS[svc.tools[0]].name, '과')} ${TOOLS[svc.tools[1]].name}부터 가져갑니다.`, `${p.label} 현장 장비는 ${j(TOOLS[svc.tools[0]].name, '이')} 먼저입니다.`],
+      svc.tools.map((i) => TOOL_P[i]), s, 's4p', true),
+  };
+  const steps = svc.steps(nm, cn);
+  const LINK = ['먼저', '이어서', '그다음', '그리고', '마지막으로'];
+  const S5 = {
+    sub: pick([`진행 순서`, `현장에서 하는 일, 순서대로`, `원인 확인부터 재확인까지`], s, 's5'),
+    p: para([steps[0].text], steps.slice(1).map((x, i) => `${LINK[i + 1]} ${x.text}`), s, 's5p', true),
+  };
+  const v = c.view;
+  const tail: Record<ModG, string[]> = {
+    price: v.table ? [`금액을 가르는 것은 막힌 위치, 원인, 필요한 장비, 분해·탈거 여부, 외부 라인 세척 여부입니다.`, `${nm} 현장도 ${v.table[1][1]}.`] : [],
+    pick: [`물어볼 것은 원인을 보여 주는지, 장비를 갖췄는지, 끝난 뒤 다시 촬영하는지, 추가요금이 붙는지입니다.`, `${BRAND}는 사장이 직접 출동해 ${nm} 현장도 처음부터 끝까지 책임집니다.`],
+    time: v.list ? [`통화 때 ${nm} 건물 종류와 층수, 막힌 곳이 한 곳인지 여러 곳인지, 역류 여부를 알려 주시면 도착 시간이 빨라집니다.`] : [],
+    base: [],
+  };
+  const S6 = {
+    sub: ({
+      price: pick([`${j(m, '이')} 정해지는 기준`, `금액이 달라지는 이유`], s, 's6'),
+      pick: pick([`업체 고르는 기준`, `${m} 비교할 때 물어볼 것`], s, 's6'),
+      time: pick([`연락 전 확인할 것`, `${m} 문의, 이렇게 진행합니다`], s, 's6'),
+      base: pick([`상담과 작업 원칙`, `원인 확인 → 제거 → 재확인`], s, 's6'),
+    } as Record<ModG, string>)[g],
+    p: g === 'base' ? para([`${BRAND}의 작업 원칙은 사장 직접 출동, 내시경 촬영 후 정확 진단, 불필요한 공사 없음입니다.`, `${nm} ${wl} 현장도 사장이 직접 출동해 내시경으로 원인부터 확인합니다.`],
+      [`타일을 깨거나 배관을 바꾸는 큰 공사는 ${nm} 현장에서도 원인이 확인될 때만 말씀드리고, 대부분은 막힌 구간만 뚫고 씻어 마무리합니다.`,
+        `금액은 ${nm} 현장을 본 뒤 작업 전에 먼저 안내하고, 동의하신 다음 작업하며 추가요금은 붙이지 않습니다.`,
+        `작업 전·후 사진과 내시경 화면을 직접 보여 드려 ${nm} 배관이 어떻게 달라졌는지 확인하실 수 있습니다.`,
+        `상담은 ${CONTACT.hours}이고, ${C.served ? `${p.city} 전 지역 당일·야간 긴급출동이 됩니다` : `${j(nm, '은')} 출동 가능 여부를 통화로 먼저 확인합니다`}.`], s, 's6b')
+      : para([v.paras[0].replace(/ 오른쪽 칸은 [^.]*\./, '')], [v.paras[1], ...tail[g]], s, 's6p', true),
+  };
+  const sections = [S1, S2, S3, S4, S5, S6].map((x, i) => ({ h: head(i, x.sub), p: x.p }));
+  return { c, cat: `${c.eyebrow} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary, sections, faq: c.faq.slice(0, 4) };
+}
+
+// description 45~80자(2026-11-24, composer-patterns §5-3): 키워드 → 이 페이지 관련 링크에 실제로 있는 다른 서비스 2~3개 → 페이지 사실 하나 → 상담 전화.
+// 80자를 넘으면 사실 문장 → 관련 키워드 수 순서로 줄인다(글자 중간에서 자르지 않음).
+function desc80(p: Page, wl: string, P: Place, C: City): string {
+  const r = related(p);
+  const norm = (w: string) => w.replace('씽', '싱');
+  const rels: string[] = [];
+  for (const x of [...r.samePlace.slice(0, 5), ...r.sameCity.slice(0, 5)]) {
+    const w = WORD_LABEL[x.word] || x.word;
+    if ([wl, ...rels].some((y) => norm(y).includes(norm(w)) || norm(w).includes(norm(y)))) continue; // 같은 말·겹치는 말 빼기
+    rels.push(w);
+  }
+  const home = P.homes.split(',')[0].trim();
+  const facts = [
+    pick([`${home} 배관도 내시경으로 원인부터 봅니다.`, `${home}도 원인 확인 뒤 작업합니다.`], p.slug, 'df'),
+    C.served ? `${p.city} 당일·야간 출동.` : `출동 여부는 통화로 확인.`,
+    `내시경 진단 후 작업.`,
+  ];
+  const tail = `상담 ${CONTACT.phone}`;
+  for (let n = Math.min(3, rels.length); n >= 0; n--) {
+    const head = n ? `${p.kw} — ${rels.slice(0, n).join('·')}도 함께 봅니다.` : `${p.kw} — 원인부터 보고 뚫습니다.`;
+    for (const f of facts) { const d = `${head} ${f} ${tail}`; if (d.length <= 80) return d; }
+  }
+  return `${p.kw} — 내시경 진단 후 작업. ${tail}`;
 }

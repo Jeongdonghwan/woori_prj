@@ -475,3 +475,23 @@ p.center { margin: 32px 0 0; }
 .pr-tx p { padding-left: 13px; font-size: clamp(.84rem, 3.6vw, .95rem); }
 .pr-ph img { width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 10px; }
 @media (max-width: 400px) { .principles li { grid-template-columns: auto minmax(0, 1fr) 38%; gap: 10px; padding: 12px; } .pr-no { width: 34px; height: 34px; font-size: .85rem; } .pr-ph img { width: 100%; height: auto; } }
+
+/* 키워드 페이지 레이 모범 구조 (2026-11-24) — h1 수식어, 핵심 요약 h2, 번호 절 6개(한 문단) */
+.hero-cat { margin: 0 0 14px; font-size: .95rem; font-weight: 600; color: rgba(255,255,255,.78); }
+.hero h1.ray-h1 span { overflow: visible; animation: fade .9s var(--ease) both; }
+.hero h1.ray-h1 .hero-sub { margin-top: 14px; font-size: .46em; font-weight: 600; letter-spacing: -.02em; line-height: 1.4; color: var(--sky); animation-delay: .15s; }
+.answer h2 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 800; letter-spacing: -.03em; color: var(--navy); }
+.answer > p { font-weight: 500; font-size: 1.06rem; line-height: 1.85; color: var(--ink); }
+.ray { padding: 72px 32px 24px; }
+.ray-article { max-width: 820px; counter-reset: rs; }
+.ray-article section { padding: 34px 0 10px; border-top: 1px solid var(--line); counter-increment: rs; }
+.ray-article section:first-child { border-top: 0; padding-top: 0; }
+.ray-article h2 { margin: 0 0 14px; font-size: clamp(1.2rem, 2.3vw, 1.5rem); font-weight: 800; letter-spacing: -.035em; line-height: 1.4; color: var(--navy); }
+.ray-article h2::before { content: counter(rs, decimal-leading-zero); display: block; margin-bottom: 6px; font-size: .78rem; font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; }
+.ray-article p { margin: 0 0 18px; font-size: 1.06rem; line-height: 1.95; color: #2b3550; word-break: keep-all; }
+.ray-shots { margin: 48px 0 0; }
+.ray-faq { margin: 88px 0 0; }
+.ray-faq h2, .ray-rel h2 { margin: 0 0 22px; font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 800; letter-spacing: -.035em; color: var(--navy); }
+.ray-faq .faq { margin: 0; }
+.ray-rel { margin: 88px 0 80px; }
+@media (max-width: 760px) { .ray { padding: 48px 16px 8px; } .ray-faq, .ray-rel { margin-top: 64px; } .ray-shots { grid-template-columns: 1fr; } }
