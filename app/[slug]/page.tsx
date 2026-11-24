@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { OPEN_PAGES, PLACES, getPage, pagePath, pageEncodedPath, canonicalPath, cityPath, cityEncodedPath, related } from '../../lib/data';
-import { compose, ray } from '../../lib/compose';
+import { ray } from '../../lib/compose';
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, serviceJsonLd } from '../../lib/jsonld';
 import { BRAND, shareMeta } from '../../lib/site';
 import { Actions, IconArrow, JsonLd, PhotoTop, pickPhoto } from '../../components/Common';
@@ -17,13 +17,14 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = getPage(params.slug);
   if (!p) return {};
-  const c = compose(p);
+  const r = ray(p);
+  const c = r.c;
   const url = canonicalPath(p);
   return {
-    title: c.title,
+    title: r.title,
     description: c.description,
     alternates: { canonical: url },
-    ...shareMeta(p.slug, `${p.kw} - ${BRAND}`, { title: c.title, description: c.description, url }),
+    ...shareMeta(p.slug, `${p.kw} - ${BRAND}`, { title: r.title, description: c.description, url }),
   };
 }
 

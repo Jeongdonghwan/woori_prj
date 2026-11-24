@@ -549,6 +549,18 @@ function para(first: string[], rest: string[], s: string, salt: string, keep = f
 }
 const KW_AT = new Set([0, 1, 2, 5]); // 절 6개 중 4개 h2 에 키워드 전체
 
+// title·h1 공용 수식어(2026-11-24): "키워드 수식어" 가 40자를 넘으면 더 짧은 벌을 고르고, 그래도 넘으면 수식어를 낱말 단위로 줄인다.
+function fitSub(kw: string, arr: string[], s: string): string {
+  const ok = (x: string) => kw.length + 1 + x.length <= 40;
+  const first = pick(arr, s, 'h1sub');
+  if (ok(first)) return first;
+  const fits = arr.filter(ok);
+  if (fits.length) return pick(fits, s, 'h1sub2');
+  const w = [...arr].sort((a, b) => a.length - b.length)[0].split(' ');
+  while (w.length > 1 && !ok(w.join(' '))) w.pop();
+  return w.join(' ');
+}
+
 export function ray(p: Page) {
   const c = compose(p);
   const P = PLACES[p.place];
@@ -570,14 +582,15 @@ export function ray(p: Page) {
   const home = P.homes.split(',')[0].trim();
   const head = (i: number, sub: string) => (KW_AT.has(i) ? `${p.kw}${i % 2 ? ' — ' : ': '}${sub}` : sub);
 
-  const h1sub = pick(({
+  const h1sub = fitSub(p.kw, ({
     price: [`막힌 위치·원인으로 정하는 금액`, `작업 전에 먼저 듣는 금액 기준`, `${cn} 배관 금액이 달라지는 이유`, ...(spot ? [`${spot} 주변 현장 금액 안내`] : [])],
     pick: [`내시경 진단과 재확인으로 고르기`, `${causes[0]}·${causes[1]} 원인부터 보는 곳`, `${cn} 배관 업체 고르는 기준`, ...(spot ? [`${spot} 주변 업체 비교 기준`] : [])],
     time: C.served
       ? [`24시간 상담과 당일·야간 출동`, `통화로 도착 시간부터 맞추기`, `${cn} 역류 급할 때 연락 순서`, ...(spot ? [`${spot} 주변 도착 시간 안내`] : [])]
       : [`출동 가능 여부부터 통화로 확인`, `24시간 상담과 도착 시간 확인`, `${cn} 역류 급할 때 연락 순서`],
     base: [`${causes[0]}·${causes[1]} 원인부터 확인`, `내시경으로 보고 뚫은 뒤 재확인`, `${home} 배관 사정에 맞춰`, ...(spot ? [`${spot} 주변 현장 작업 순서`] : [])],
-  } as Record<ModG, string[]>)[g], s, 'h1sub');
+  } as Record<ModG, string[]>)[g], s);
+  const title = `${p.kw} ${h1sub} | ${BRAND}`; // h1 과 같은 글자 + 상호 한 번
 
   const served = C.served
     ? `${nm} 현장은 ${p.city} 전 지역 출동 범위에 들고 당일·야간 긴급출동도 됩니다.`
@@ -653,7 +666,7 @@ export function ray(p: Page) {
       : para([v.paras[0].replace(/ 오른쪽 칸은 [^.]*\./, '')], [v.paras[1], ...tail[g]], s, 's6p', true),
   };
   const sections = [S1, S2, S3, S4, S5, S6].map((x, i) => ({ h: head(i, x.sub), p: x.p }));
-  return { c, cat: `${c.eyebrow} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary, sections, faq: c.faq.slice(0, 4) };
+  return { c, title, cat: `${c.eyebrow} · ${wl}`, h1sub, lead: c.lead, summary, facts: c.summary, sections, faq: c.faq.slice(0, 4) };
 }
 
 // description 45~80자(2026-11-24, composer-patterns §5-3): 키워드 → 이 페이지 관련 링크에 실제로 있는 다른 서비스 2~3개 → 페이지 사실 하나 → 상담 전화.
