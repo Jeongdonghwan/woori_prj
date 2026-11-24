@@ -5,7 +5,7 @@
 - 열린 키워드 페이지 전부: h1(키워드+수식어) 중복 수, 수식어 없는 h1 수
 - 구조: h2 수, 키워드 전체가 든 h2 수, 절 문단 길이(공백 제외), 본문 글자, 문단(p) 수와 200자당 비율, 본문 내부링크 수
 - 같은 문장 비율: 같은 주제(--group 필드가 같은 페이지)끼리 무작위 3,000쌍, 문장 단위 겹침 / 더 짧은 쪽 문장 수
-- title: `{키워드} {h1 수식어} | {상호}` — 중복, 앞부분 == h1 글자, 전체 60자·앞부분 40자 이하
+- title: `{키워드} {h1 수식어} | {상호}` — 중복, 앞부분 == h1 글자, 전체 40자 이하(넘으면 상호 없이)
 - description: 길이 45~80자(공백 포함)·중복 (composer-patterns §5-3)
 - 조사 의심: 받침과 안 맞는 을/를·과/와·은·으로
 기준: h1 중복 0, description 45~80자·중복 0, 같은 주제 같은 문장 최대 30% 이하, 조사 의심 0. 하나라도 어기면 종료 코드 1.
@@ -60,9 +60,9 @@ lens = [nsp(x) for r in R.values() for x in r['secp']]
 print(f'열린 키워드 페이지 {n} | h1 중복 {dup} | 수식어 없는 h1 {nosub}')
 tl = [len(r['title']) for r in R.values()]
 tdup = n - len({r['title'] for r in R.values()})
-tdiff = sum(1 for r in R.values() if r['title'].rsplit(' | ', 1)[0] != r['h1'])
-tlong = sum(1 for r in R.values() if len(r['title']) > 60 or len(r['h1']) > 40)
-print(f'title 길이 {min(tl)}~{max(tl)}자 · 중복 {tdup} · h1 과 다른 것 {tdiff} · 길이 초과(전체 60·앞 40) {tlong}')
+tdiff = sum(1 for r in R.values() if r['title'].split(' | ')[0] != r['h1'])
+tlong = sum(1 for r in R.values() if len(r['title']) > 40)
+print(f'title 길이 {min(tl)}~{max(tl)}자 · 중복 {tdup} · h1 과 다른 것 {tdiff} · 40자 초과 {tlong}')
 dl = [len(r['desc']) for r in R.values()]
 dbad = sum(1 for x in dl if x < 45 or x > 80)
 ddup = n - len({r['desc'] for r in R.values()})

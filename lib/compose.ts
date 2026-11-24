@@ -590,7 +590,8 @@ export function ray(p: Page) {
       : [`출동 가능 여부부터 통화로 확인`, `24시간 상담과 도착 시간 확인`, `${cn} 역류 급할 때 연락 순서`],
     base: [`${causes[0]}·${causes[1]} 원인부터 확인`, `내시경으로 보고 뚫은 뒤 재확인`, `${home} 배관 사정에 맞춰`, ...(spot ? [`${spot} 주변 현장 작업 순서`] : [])],
   } as Record<ModG, string[]>)[g], s);
-  const title = `${p.kw} ${h1sub} | ${BRAND}`; // h1 과 같은 글자 + 상호 한 번
+  const front = `${p.kw} ${h1sub}`; // h1 과 같은 글자
+  const title = `${front} | ${BRAND}`.length <= 40 ? `${front} | ${BRAND}` : front; // 네이버 권장 40자: 넘으면 상호를 뺀다(og:site_name 에 상호가 있다)
 
   const served = C.served
     ? `${nm} 현장은 ${p.city} 전 지역 출동 범위에 들고 당일·야간 긴급출동도 됩니다.`
